@@ -1,0 +1,28 @@
+
+
+Requirements for custom suite: 
+    -Must choose from 3 sillhouettes 
+    -Waist and inseam selection 
+
+Features: 
+    Fred is guiding you through 
+    Requests user info (name, email, phone, age)
+    Request user specs (height, waist, leg length, thigh diameter)
+
+
+First form (basic info)
+    - Name *required 
+    - Email *required
+    - Phone *required 
+    - Instagram
+    - Preffered contact method 
+    - Age 
+    - Gender 
+    - Pics** (for our inspo)
+    - Additional comment
+Important: 
+    As soon as someone submits, it should generate an order number that associates this info with it. 
+    Pics should allow you to upload a file
+    Allow for easy resizing of boxes. 
+    Update the current page.tsx 
+    After user submits - it should prompt them to create an account with us, prompt a box for desired username and password
