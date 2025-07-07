@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from 'next/navigation'
+import FuzzyText from './text/FuzzyText';
 
 export default function App() {
   const canvasRef = useRef(null)
   const [dissolveStarted, setDissolveStarted] = useState(false)
   const [navbarBuilt, setNavbarBuilt] = useState(false)
+  const [showEnter, setShowEnter] = useState(false)
 
   const chunkSize = 5
   const gravity = -9
@@ -30,6 +32,10 @@ export default function App() {
         // fallback: simulate click on canvas to start
         canvas.dispatchEvent(new MouseEvent("click", { bubbles: true }))
       }
+        // Delay enter button appearance
+        setTimeout(() => {
+          setShowEnter(true)
+        }, 200)
     } else if (clickCount === 1) {
       router.push('/gallery')
     }
@@ -73,45 +79,7 @@ export default function App() {
     const aboutX = startX + 2 * (buttonWidth + spacingBetween)
 
 
-
-    function loadButtonImage(src, offsetX, offsetY, width, height, chunkSize, callback) {
-      const image = new Image()
-      image.src = src
-      image.onload = () => {
-        const buttonPixels = []
-
-        const canvas = document.createElement("canvas")
-        canvas.width = width
-        canvas.height = height
-        const ctx = canvas.getContext("2d")
-        ctx.drawImage(image, 0, 0, width, height)
-
-        const imageData = ctx.getImageData(0, 0, width, height)
-
-        for (let y = 0; y < height; y += chunkSize) {
-          for (let x = 0; x < width; x += chunkSize) {
-            const i = (y * width + x) * 4
-            const r = imageData.data[i]
-            const g = imageData.data[i + 1]
-            const b = imageData.data[i + 2]
-            const a = imageData.data[i + 3]
-
-            if (a > 50) {
-              buttonPixels.push({
-                x: offsetX + x,
-                y: offsetY + y,
-                color: `rgba(${r}, ${g}, ${b}, ${a / 255})`,
-                visible: false
-              })
-            }
-          }
-        }
-
-        callback(buttonPixels)
-      }
-    }
-
-    const drawInitialLogo = () => {
+     const drawInitialLogo = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       circlePixels.forEach(p => {
         ctx.fillStyle = p.color
@@ -120,7 +88,7 @@ export default function App() {
     }
 
     const logo = new Image()
-    logo.src = "/stitched_static_graffiti_white_invert.png"
+    logo.src = "/navbar/stitched_static_graffiti_white_invert.png"
     logo.onload = () => {
       const offCanvas = document.createElement("canvas")
       offCanvas.width = canvas.width
@@ -158,9 +126,6 @@ export default function App() {
 
       circlePixels.sort((a, b) => a.r - b.r)
 
-      loadButtonImage("/enter.png", startX + buttonWidth, buttonY, buttonWidth, buttonHeight, buttonChunkSize, pixels => {
-        aboutButtonPixels = pixels
-      })
 
       const spawnChunks = () => {
         const toSpawn = circlePixels.filter(p => !p.spawned).slice(0, chunksPerSecond)
@@ -234,10 +199,6 @@ export default function App() {
           })
         }
 
-        revealPixels(homeButtonPixels)
-        revealPixels(shopButtonPixels)
-        revealPixels(aboutButtonPixels)
-
         function updateChunkedVisibility(pixelArray, cursorRef) {
           let cursor = cursorRef.current
           let count = 0
@@ -299,21 +260,35 @@ export default function App() {
     return () => cancelAnimationFrame(animationFrame)
   }, [])
 
+
+
   return (
+    
     <div
       onClick={handleClick}
-      className="min-h-screen bg-black flex justify-center items-center cursor-pointer"
+      className="relative min-h-screen bg-black flex justify-center items-center cursor-pointer"
     >
       <canvas
         ref={canvasRef}
-        className="pointer-events-none"
-        style={{
-          marginTop: '-100px',
-          width: '100vh',
-          height: '100vh'
-        }}
+        className="pointer-events-none absolute top-0 left-0 w-full h-full"
       />
+
+      {/* Fade-in Enter Text */}
+      <div
+        className={`top-100 z-10 text-white w-150 h-auto transition-opacity duration-500 ${
+          showEnter ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+       <FuzzyText
+          baseIntensity={0.2}
+          hoverIntensity={1}
+          enableHover={true}
+        >
+          Enter
+        </FuzzyText>
+      </div>
     </div>
   )
+
 }
 

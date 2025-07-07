@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react"
 export default function MatrixRainEnhanced() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  
   const [drops, setDrops] = useState<
     Array<{
       x: number
@@ -82,7 +83,9 @@ export default function MatrixRainEnhanced() {
   ].join("")
 
   // Column spacing (reduced to increase density)
-  const COLUMN_SPACING = 30 // px between columns (reduced from 20px)
+  const COLUMN_SPACING = 20// px between columns (reduced from 20px)
+
+  const dropsRef = useRef(drops) // Added
 
   // Speed categories
   const SPEED_CATEGORIES = {
@@ -126,8 +129,8 @@ export default function MatrixRainEnhanced() {
           const { min, max } = SPEED_CATEGORIES[speedCategory]
           const speed = min + Math.random() * (max - min)
 
-          const length = 5 + Math.floor(Math.random() * 25) // More varied lengths
-          const changeFrequency = Math.random() * 0.15 // How often characters change (0-15% chance)
+          const length = 5 + Math.floor(Math.random() * 30) // More varied lengths
+          const changeFrequency = Math.random() * 0.20 // How often characters change (0-15% chance)
           const glowIntensity = 0.5 + Math.random() * 0.5 // Random glow effect intensity (higher minimum)
           const fadeLength = 0.2 + Math.random() * 0.3 // Fade effect length (20-50% of screen height)
 
@@ -151,6 +154,7 @@ export default function MatrixRainEnhanced() {
         })
 
         setDrops(newDrops)
+        dropsRef.current = newDrops
       }
     }
 
