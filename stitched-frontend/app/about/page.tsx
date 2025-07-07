@@ -1,7 +1,7 @@
 'use client';
 
-import InvisibleNavbar from '../../components/InvisibleNavbar';
-import MatrixRain from '../../components/matrix-rain-enhanced'
+import InvisibleNavbar from '../../components/navbar/InvisibleNavbar';
+import MatrixRain from '../../components/backgrounds/matrix-rain-enhanced'
 
 export default function About() {
   return (

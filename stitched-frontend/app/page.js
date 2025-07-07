@@ -1,9 +1,11 @@
-import AnimatedLanding from '../components/AnimatedLanding';
+'use client'
+
+import AnimatedLanding from '../components/effects/AnimatedLanding';
 
 export default function Home() {
   return (
     <div>
-      <AnimatedLanding />
+      <AnimatedLanding/>
     </div>
   );
 }
