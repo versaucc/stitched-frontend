@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../../../lib/supabase'
 import CustomSuiteForm from '../../../../components/CustomSuiteForm'
-import MinimalNavbar from '../../../../components/MinimalNavbar'
-import MatrixRain from '../../../../components/matrix-rain-enhanced'
+import MinimalNavbar from '../../../../components/navbar/MinimalNavbar'
+import MatrixRain from '../../../../components/backgrounds/matrix-rain-enhanced'
 
 export default function CustomSuitePage() {
   const [loading, setLoading] = useState(true)
