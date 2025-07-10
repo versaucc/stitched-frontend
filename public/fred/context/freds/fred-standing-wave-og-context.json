@@ -1,0 +1,65 @@
+{
+  "character_profile": {
+    "name": "Fred",
+    "pose": "standing_wave",
+    "gesture": "right hand raised, waving",
+    "style": "urban cartoon",
+    "camera_reference": {
+      "angle": "frontal",
+      "elevation": "eye-level",
+      "distance": "medium shot",
+      "notes": "Centered character with neutral posture; full body visible with slight perspective distortion around feet"
+    },
+    "headwear": {
+      "type": "mask",
+      "material": "knit or fabric",
+      "color": "green",
+      "details": {
+        "eye_holes": "oval",
+        "mouth_hole": "small horizontal slit",
+        "texture": "vertical stitch-like shading"
+      }
+    },
+    "top": {
+      "type": "short sleeve t-shirt",
+      "fit": "slim",
+      "color": "black"
+    },
+    "jeans": {
+      "type": "baggy denim",
+      "fit": "ultra baggy / parachute",
+      "waist": "mid-rise",
+      "inseam": "long, reaches shoe tops",
+      "cuff": "wide opening, stacks over sneakers",
+      "color": "mid-wash blue",
+      "details": {
+        "crease_lines": "visible along inseam and thigh",
+        "pockets": "not visible, assumed standard",
+        "belt": {
+          "style": "loose-hanging web belt",
+          "color": "olive green",
+          "tail": "drapes past buckle"
+        },
+        "silhouette": "dramatic volume, strong taper toward waist"
+      }
+    },
+    "footwear": {
+      "type": "chunky sneakers",
+      "color": "red and white",
+      "design": "comic-style exaggerated outsole"
+    },
+    "accessories": {
+      "floating_icon": {
+        "type": "graffiti tag",
+        "symbol": "halo and cloud",
+        "placement": "right side near waist",
+        "style": "urban spray style"
+      }
+    },
+    "style_notes": {
+      "visual_influence": "graffiti, low-res internet art",
+      "demographic": "youth/streetwear culture",
+      "attitude": "nonchalant, friendly, self-styled"
+    }
+  }
+}

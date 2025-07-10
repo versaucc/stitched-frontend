@@ -1,0 +1,41 @@
+{
+  "denim_silhouette_profile": {
+    "type": "baggy denim",
+    "fit": "ultra baggy / parachute",
+    "waist": "mid-rise",
+    "inseam": "long, reaches shoe tops",
+    "cuff": "wide opening, stacks over sneakers",
+    "color": "mid-wash blue",
+
+    "texture": {
+      "base": "slightly faded cotton denim",
+      "details": [
+        "visible crease lines along inseam and thigh",
+        "mild whiskering near upper thighs",
+        "slight fray at hem to imply length and weight",
+        "subtle vertical grain to emphasize denim weave"
+      ]
+    },
+
+    "silhouette": {
+      "volume": "high",
+      "taper": "strong taper toward waist",
+      "outline_behavior": "billows out from hips and stacks densely around ankles",
+      "pose_impact": "fabric movement reacts heavily to posture, showcasing folds and drape"
+    },
+
+    "silhouette_style": {
+      "loose_fit": "Comfortable and relaxed cut with generous room through the thighs and calves, but without excessive volume or stacking.",
+      "baggy": "Visibly oversized with extra room throughout, creating a relaxed and urban aesthetic that loosely drapes down the legs.",
+      "ultra_baggy": "Extreme volume from hip to ankle, often billowing or stacking heavily, emphasizing exaggerated streetwear proportions."
+    },
+
+    "shoe_color": "white",
+
+    "background": "transparent",
+    "camera_angle": "front",
+    "camera_distance": "10ft",
+
+    "intended_use": "for showcasing and comparing silhouettes of denim fits"
+  }
+}
