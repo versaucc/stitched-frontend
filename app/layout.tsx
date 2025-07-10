@@ -1,16 +1,16 @@
-// layout.tsx
+// app/layout.tsx
 import './globals.css'
-import RootClientWrapper from '../components/RootClientWrapper'
+import { ReactNode } from 'react'
 
-export const metadata = { /* ... */ }
+export const metadata = {
+  title: 'Stitched',
+  description: 'Custom upcycled denim',
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <RootClientWrapper />
-        {children}
-      </body>
+      <body className="bg-black text-white">{children}</body>
     </html>
   )
 }
