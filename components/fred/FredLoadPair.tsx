@@ -82,7 +82,7 @@ export default function FredLoadPair({ onComplete }: { onComplete: () => void })
         UID : profile.UID,
         ordered : false,
         phone : profile.phone, 
-        instagram : profile.instagram | '',
+        instagram : profile.instagram || '',
         session_id,
       }
     ]).select().single()
