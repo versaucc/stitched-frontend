@@ -76,9 +76,10 @@ export default function FredSummary() {
   const patches = order.patches?.selectedPatches || {}
 
   const parsedPatches = Object.entries(patches).map(([position, path]) => {
-    const fileName = path.split('/').pop() || 'unknown.png'
+    const fileName = typeof path === 'string' ? path.split('/').pop() : 'unknown.png'
     return `${position}: ${fileName}`
   }).join(', ')
+
 
   const displayFields = [
     { label: 'Design Name', value: order.pair_name },
