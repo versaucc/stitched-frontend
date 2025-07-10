@@ -1,15 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../../lib/supabase'
 
 export default function LoginPage() {
   const router = useRouter()
-  const redirect = new URLSearchParams(window.location.search).get('redirect') || '/shop'
+  const [redirect, setRedirect]  = useState('/home')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const redirectParam = params.get('redirect') || '/shop';
+    setRedirect(redirectParam);
+  }, []);
 
 const handleLogin = async (e: React.FormEvent) => {
   e.preventDefault()
@@ -24,6 +30,7 @@ const handleLogin = async (e: React.FormEvent) => {
     setError(error?.message || 'Login failed')
     return
   }
+
 
   const user = authData.user
 

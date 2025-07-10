@@ -6,9 +6,9 @@ import { IncrementStepCount } from './IncrementStepCount'
 import { supabase } from '../../lib/supabase'
 
 const options = [
-  { id: 'SilhouetteOne', src: '/fred/silhouettes/silhouetteOne.jpg', alt: 'Silhouette One' },
-  { id: 'SilhouetteTwo', src: '/fred/silhouettes/silhouetteTwo.jpg', alt: 'Silhouette Two' },
-  { id: 'SilhouetteThree', src: '/fred/silhouettes/silhouetteThree.jpg', alt: 'Silhouette Three' },
+  { id: 'SilhouetteOne', src: '/fred/silhouettes/silhouette-loose.png', alt: 'Loose' },
+  { id: 'SilhouetteTwo', src: '/fred/silhouettes/silhouette-baggy.png', alt: 'Baggy' },
+  { id: 'SilhouetteThree', src: '/fred/silhouettes/silhouette-ultra-baggy.png', alt: 'Ultra-Baggy' },
 ]
 
 export default function FredQuestionOne({ onComplete }: { onComplete: () => void }) {
@@ -62,7 +62,7 @@ export default function FredQuestionOne({ onComplete }: { onComplete: () => void
             <img
               src={option.src}
               alt={option.alt}
-              className="w-48 h-auto"
+              className="w-36 h-auto"
             />
           </div>
         ))}

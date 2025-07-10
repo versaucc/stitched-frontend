@@ -1,0 +1,10 @@
+TODO: 
+    advanced JSON context profile for fred: 
+        -3 silhouettes
+            -light-wash, medium-wash, dark-wash, black, two-tone?, other colors
+            -close ups for patch regions 
+            -generate mockups for patches (additional patches?)
+            -css adjustable leg openings? 
+
+
+            create supabase provider 
