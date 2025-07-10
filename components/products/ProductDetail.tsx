@@ -2,7 +2,15 @@
 
 import { useState } from 'react'
 
-export default function ProductDetail({ product }) {
+type Product = {
+  slug: string
+  name: string
+  price: number
+  description: string
+  images: string[]
+}
+
+export default function ProductDetail({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState('30x30')
 
   const sizes = ['30x30', '28x30', '32x30', '32x32']
