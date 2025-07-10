@@ -1,9 +1,8 @@
-// pages/admin.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClientComponentClient} from "@supabase/auth-helpers-nextjs";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function AdminPage() {
   const [loading, setLoading] = useState(true);
@@ -11,15 +10,32 @@ export default function AdminPage() {
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordValidated, setPasswordValidated] = useState(false);
+  const [user, setUser] = useState<any>(null);
 
   const supabase = createClientComponentClient();
   const router = useRouter();
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
 
- 
+      if (error || !user) {
+        setError("User not logged in.");
+        setLoading(false);
+        return;
+      }
+
+      setUser(user);
+    };
+
+    fetchUser();
+  }, []);
 
   useEffect(() => {
-    if (!user) return; // wait until user is loaded
+    if (!user) return;
 
     const checkAdminStatus = async () => {
       const { data: profile, error: profileError } = await supabase
@@ -50,6 +66,7 @@ export default function AdminPage() {
   };
 
   if (loading) return <p className="text-white">Checking access...</p>;
+
   if (!isAdmin || !passwordValidated)
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-black text-white">
