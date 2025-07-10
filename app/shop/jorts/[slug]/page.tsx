@@ -1,5 +1,12 @@
+// app/shop/jorts/[slug]/page.tsx
 import { notFound } from 'next/navigation'
 import ProductDetail from '../../../../components/products/ProductDetail'
+
+interface PageProps {
+  params: {
+    slug: string
+  }
+}
 
 const allProducts = [
   {
@@ -14,8 +21,8 @@ const allProducts = [
   },
 ]
 
-export default function ProductSlugPage({ params }: { params: { slug: string } }) {
-  const product = allProducts.find(p => p.slug === params.slug)
+export default function ProductSlugPage({ params }: PageProps) {
+  const product = allProducts.find((p) => p.slug === params.slug)
 
   if (!product) return notFound()
 
