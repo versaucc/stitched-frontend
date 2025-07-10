@@ -1,6 +1,6 @@
 // /app/api/square-inventory/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabaseClient'
+import { createClient } from '../lib/supabaseClient'
 
 export async function POST(req: NextRequest) {
   const rawBody = await req.text()
