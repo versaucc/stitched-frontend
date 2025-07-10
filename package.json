@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "stitched build --output public",
     "start": "next start",
     "lint": "next lint"
+}
   },
   "dependencies": {
     "@react-three/fiber": "^9.2.0",
