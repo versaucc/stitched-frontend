@@ -24,7 +24,7 @@ const rotatingContent = [
   },
 ]
 
-const galleryImages = Array.from({ length: 12 }, (_, i) => `/gallery/pic${i + 1}.jpg`)
+const galleryImages = Array.from({ length: 12 }, (_, i) => `/gallery/pic${i + 1}.JPG`)
 
 export default function HomePage() {
   const router = useRouter()
