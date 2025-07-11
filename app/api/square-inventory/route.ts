@@ -4,7 +4,7 @@ import { squareClient } from '../lib/square';
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const sku = searchParams.get('sku');
+    const sku = searchParams.get('SKU');
 
     if (!sku) {
       return NextResponse.json({ error: 'SKU is required' }, { status: 400 });
