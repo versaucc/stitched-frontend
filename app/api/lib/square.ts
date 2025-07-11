@@ -1,8 +1,6 @@
-import Square from 'square';
+import { SquareClient } from 'square';
 
-const client = new Square.Client({
-  accessToken: process.env.SQUARE_ACCESS_TOKEN!,
+export const square = new SquareClient({
+  token: process.env.SQUARE_ACCESS_TOKEN!,
   environment: 'production', // or 'sandbox'
 });
-
-export const square = client;
