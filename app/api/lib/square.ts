@@ -1,8 +1,8 @@
 // lib/square.ts
-import { Client, Environment } from 'square';
+import { SquareClient } from 'square';
 
-export const squareClient = new Client({
-  accessToken: process.env.SQUARE_ACCESS_TOKEN!,
-  environment: process.env.NODE_ENV === 'production' ? Environment.Production : Environment.Sandbox,
+export const squareClient = new SquareClient({
+  token: process.env.SQUARE_ACCESS_TOKEN!,
+  environment: 'production',
 });
 
