@@ -25,7 +25,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // ✅ Insert into Supabase inventory table
     const { data, error } = await supabase
       .from('inventory')
       .insert([
@@ -54,12 +53,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed to insert inventory record' }, { status: 500 });
     }
 
-    // ✅ Optionally send to Square (comment this out if not using)
-    // const squareRes = await squareClient.inventory.batchInventory({ ... })
-
     return NextResponse.json({ message: 'Inventory created', data });
   } catch (err: any) {
     console.error('[SQUARE-INVENTORY-API]', err);
     return NextResponse.json({ error: err.message || 'Unexpected server error' }, { status: 500 });
   }
+}
+
+// ✅ Optional: allow GET request for testing/debugging
+export async function GET() {
+  return NextResponse.json({
+    message: 'Use POST to create a new inventory item at this endpoint.',
+  });
+}
+
+// ❌ If you want to block unsupported methods like PUT/DELETE, you can optionally do this:
+export async function PUT() {
+  return NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
+}
+
+export async function DELETE() {
+  return NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
 }
