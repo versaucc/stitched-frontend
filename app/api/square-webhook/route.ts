@@ -1,30 +1,24 @@
+// app/api/square-webhook/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
+  const signature = req.headers.get('x-square-signature');
+  const body = await req.text(); // Square signs the raw body
 
-  const { type, data } = body;
+  // TODO: Replace with your own verification logic using your webhook signature key
+  const isValid = true; // Implement signature validation here
 
-  if (type === 'catalog.version.updated') {
-    // Optional: fetch item data and update your Supabase inventory
-    // Or re-fetch from Square here
+  if (!isValid) {
+    return new NextResponse('Invalid signature', { status: 401 });
   }
 
-  if (type === 'inventory.count.updated') {
-    const { catalog_object_id, location_id, quantity } = data.object.inventory_counts[0];
+  const event = JSON.parse(body);
+  console.log('[SQUARE WEBHOOK EVENT]', event);
 
-    // Update Supabase with new stock count
-    await supabase
-      .from('inventory')
-      .update({ stock: parseInt(quantity, 10) })
-      .eq('square_variation_id', catalog_object_id);
+  // Handle specific event types if needed
+  if (event.type === 'inventory.count.updated') {
+    // Process inventory update
   }
 
-  return NextResponse.json({ received: true });
+  return new NextResponse('ok', { status: 200 });
 }
