@@ -1,35 +1,56 @@
-// app/api/square-inventory/route.ts
+import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+import { Client } from 'square';
 
-import { NextRequest, NextResponse } from 'next/server'
+export async function POST(req: Request) {
+  const body = await req.json();
 
-export async function POST(req: NextRequest) {
-  const body = await req.json()
-  const itemId = body.item_id
-  const newQuantity = body.quantity
+  const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!);
 
-  const squareResponse = await fetch(`https://connect.squareup.com/v2/inventory/adjust`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.SQUARE_ACCESS_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      idempotency_key: crypto.randomUUID(),
-      location_id: process.env.SQUARE_LOCATION_ID,
-      changes: [
-        {
-          type: "ADJUSTMENT",
-          adjustment: {
-            catalog_object_id: itemId,
-            from_state: "IN_STOCK",
-            to_state: "IN_STOCK",
-            quantity: String(newQuantity)
-          }
-        }
-      ]
-    }),
-  })
+  const square = new Client({
+    accessToken: process.env.SQUARE_ACCESS_TOKEN!,
+    environment: 'production',
+  });
 
-  const data = await squareResponse.json()
-  return NextResponse.json(data)
+  try {
+    const { result } = await square.catalogApi.upsertCatalogObject({
+      idempotencyKey: crypto.randomUUID(),
+      object: {
+        type: 'ITEM',
+        id: '#TEMP_ID',
+        itemData: {
+          name: body.name,
+          description: body.description,
+          variations: [
+            {
+              type: 'ITEM_VARIATION',
+              id: '#TEMP_VAR',
+              itemVariationData: {
+                name: 'Default',
+                pricingType: 'FIXED_PRICING',
+                priceMoney: {
+                  amount: body.price,
+                  currency: 'USD',
+                },
+              },
+            },
+          ],
+        },
+      },
+    });
+
+    const itemId = result.catalogObject?.id;
+    const variationId = result.catalogObject?.itemData?.variations?.[0]?.id;
+
+    // Update Supabase with returned Square IDs
+    await supabase
+      .from('inventory')
+      .update({ square_item_id: itemId, square_variation_id: variationId })
+      .eq('id', body.id);
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('Error syncing to Square:', err);
+    return NextResponse.json({ error: 'Failed to sync to Square' }, { status: 500 });
+  }
 }
