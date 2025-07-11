@@ -1,59 +1,65 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { supabase } from '../lib/supabaseClient';
 import { squareClient } from '../lib/square';
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const sku = searchParams.get('SKU');
+    const body = await req.json();
+    const {
+      name,
+      SKU,
+      quantity,
+      category,
+      brand,
+      wash,
+      size,
+      cost,
+      price,
+      description,
+      image_url,
+      square_item_id,
+      patches,
+    } = body;
 
-    if (!sku) {
-      return NextResponse.json({ error: 'SKU is required' }, { status: 400 });
+    if (!name || !SKU || quantity === undefined) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Step 1: Search items by SKU
-    const searchResult = await squareClient.catalog.searchItems({
-      textFilter: sku,
-      productTypes: ['REGULAR'],
-    });
+    // ✅ Insert into Supabase inventory table
+    const { data, error } = await supabase
+      .from('inventory')
+      .insert([
+        {
+          name,
+          SKU,
+          quantity,
+          category,
+          brand,
+          wash,
+          size,
+          cost,
+          price,
+          description,
+          image_url,
+          square_item_id,
+          patches,
+          stock: quantity > 0,
+        },
+      ])
+      .select()
+      .single();
 
-    const item = searchResult.items?.[0];
-    if (!item?.id) {
-      return NextResponse.json({ error: 'No matching item found' }, { status: 404 });
+    if (error) {
+      console.error('[SUPABASE INSERT ERROR]', error);
+      return NextResponse.json({ error: 'Failed to insert inventory record' }, { status: 500 });
     }
 
-    // Step 2: Retrieve full catalog object with variations
-    const fullCatalog = await squareClient.catalog.batchGet({
-      objectIds: [item.id],
-    });
+    // ✅ Optionally send to Square (comment this out if not using)
+    // const squareRes = await squareClient.inventoryApi.batchChangeInventory({ ... })
 
-  const variation = fullCatalog.objects
-    ?.filter(obj => obj.type === 'ITEM_VARIATION')
-    .find(obj => obj.itemVariationData?.sku === sku);
-
-
-
-    if (!variation) {
-      return NextResponse.json({ error: 'No variation with that SKU found' }, { status: 404 });
-    }
-
-    const catalogObjectId = variation.id;
-
-    // Step 3: Fetch inventory for that variation
-    const countsPage = await squareClient.inventory.batchGetCounts({
-      catalogObjectIds: [catalogObjectId],
-      locationIds: [process.env.SQUARE_LOCATION_ID!],
-    });
-
-    const counts = [];
-    for await (const count of countsPage) {
-      counts.push(count);
-    }
-
-    return NextResponse.json({ inventory: counts });
+    return NextResponse.json({ message: 'Inventory created', data });
   } catch (err: any) {
-    console.error('[SQUARE_INVENTORY_BY_SKU_ERROR]', err);
-    return NextResponse.json({
-      error: err.message || 'Failed to fetch inventory by SKU',
-    }, { status: 500 });
+    console.error('[SQUARE-INVENTORY-API]', err);
+    return NextResponse.json({ error: err.message || 'Unexpected server error' }, { status: 500 });
   }
 }
