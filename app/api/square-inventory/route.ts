@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     }
 
     // ✅ Optionally send to Square (comment this out if not using)
-    // const squareRes = await squareClient.inventoryApi.batchChangeInventory({ ... })
+    // const squareRes = await squareClient.inventory.batchInventory({ ... })
 
     return NextResponse.json({ message: 'Inventory created', data });
   } catch (err: any) {
