@@ -1,33 +1,35 @@
-// /app/api/square-inventory/route.ts
+// app/api/square-inventory/route.ts
+
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '../lib/supabaseClient'
 
 export async function POST(req: NextRequest) {
-  const rawBody = await req.text()
+  const body = await req.json()
+  const itemId = body.item_id
+  const newQuantity = body.quantity
 
-  try {
-    const payload = JSON.parse(rawBody)
-    console.log('Square webhook payload:', payload)
+  const squareResponse = await fetch(`https://connect.squareup.com/v2/inventory/adjust`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.SQUARE_ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      idempotency_key: crypto.randomUUID(),
+      location_id: process.env.SQUARE_LOCATION_ID,
+      changes: [
+        {
+          type: "ADJUSTMENT",
+          adjustment: {
+            catalog_object_id: itemId,
+            from_state: "IN_STOCK",
+            to_state: "IN_STOCK",
+            quantity: String(newQuantity)
+          }
+        }
+      ]
+    }),
+  })
 
-    const eventType = payload.type
-    const object = payload.data?.object
-
-    if (eventType === 'inventory.count.updated' && object?.inventory_counts) {
-      const supabase = createClient()
-
-      for (const item of object.inventory_counts) {
-        const { catalog_object_id, quantity } = item
-
-        await supabase
-          .from('inventory')
-          .update({ quantity: parseInt(quantity) })
-          .eq('square_item_id', catalog_object_id)
-      }
-    }
-
-    return NextResponse.json({ message: 'Handled' }, { status: 200 })
-  } catch (err) {
-    console.error('Webhook error:', err)
-    return NextResponse.json({ message: 'Invalid payload' }, { status: 400 })
-  }
+  const data = await squareResponse.json()
+  return NextResponse.json(data)
 }
