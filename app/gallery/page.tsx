@@ -4,7 +4,7 @@ import MatrixRain from '../../components/backgrounds/matrix-rain-enhanced'
 import InvisibleNavbar from '../../components/navbar/InvisibleNavbar'
 
 export default function Gallery() {
-  const photos = Array.from({ length: 12 }, (_, i) => `/gallery/pic${i + 1}.jpg`)
+  const photos = Array.from({ length: 12 }, (_, i) => `/gallery/pic${i + 1}.JPG`)
 
   return (
     <div className="relative w-screen h-full overflow-auto bg-black">
