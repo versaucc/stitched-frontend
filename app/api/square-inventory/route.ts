@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { squareClient } from '@/lib/square';
+import { squareClient } from '../lib/square';
 
 export async function GET(req: NextRequest) {
   try {
@@ -22,13 +22,15 @@ export async function GET(req: NextRequest) {
     }
 
     // Step 2: Retrieve full catalog object with variations
-    const fullCatalog = await squareClient.catalog.batchRetrieve({
+    const fullCatalog = await squareClient.catalog.batchGet({
       objectIds: [item.id],
     });
 
-    const variation = fullCatalog.objects
-      ?.flatMap(obj => obj.itemData?.variations || [])
-      .find(v => v.itemVariationData?.sku === sku);
+  const variation = fullCatalog.objects
+    ?.filter(obj => obj.type === 'ITEM_VARIATION')
+    .find(obj => obj.itemVariationData?.sku === sku);
+
+
 
     if (!variation) {
       return NextResponse.json({ error: 'No variation with that SKU found' }, { status: 404 });
