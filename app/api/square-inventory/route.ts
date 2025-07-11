@@ -1,6 +1,5 @@
-// app/api/square-inventory/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { squareClient } from '../lib/square';
+import { squareClient } from '@/lib/square';
 
 export async function GET(req: NextRequest) {
   try {
@@ -11,36 +10,46 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'SKU is required' }, { status: 400 });
     }
 
-    // ✅ Search catalog items by SKU using searchItems (not searchCatalogObjects)
-    const result = await squareClient.catalog.searchItems({
+    // Step 1: Search items by SKU
+    const searchResult = await squareClient.catalog.searchItems({
       textFilter: sku,
       productTypes: ['REGULAR'],
     });
 
-    const match = result.items
-      ?.flatMap((item) => item.variations || [])
-      .find((variation) => variation.itemVariationData?.sku === sku);
-
-    if (!match) {
-      return NextResponse.json({ error: 'No item variation with that SKU found' }, { status: 404 });
+    const item = searchResult.items?.[0];
+    if (!item?.id) {
+      return NextResponse.json({ error: 'No matching item found' }, { status: 404 });
     }
 
-    const catalogObjectId = match.id;
+    // Step 2: Retrieve full catalog object with variations
+    const fullCatalog = await squareClient.catalog.batchRetrieve({
+      objectIds: [item.id],
+    });
 
-    // ✅ Fetch inventory for the matching catalog object
-    const response = await squareClient.inventory.batchGetCounts({
+    const variation = fullCatalog.objects
+      ?.flatMap(obj => obj.itemData?.variations || [])
+      .find(v => v.itemVariationData?.sku === sku);
+
+    if (!variation) {
+      return NextResponse.json({ error: 'No variation with that SKU found' }, { status: 404 });
+    }
+
+    const catalogObjectId = variation.id;
+
+    // Step 3: Fetch inventory for that variation
+    const countsPage = await squareClient.inventory.batchGetCounts({
       catalogObjectIds: [catalogObjectId],
       locationIds: [process.env.SQUARE_LOCATION_ID!],
     });
 
     const counts = [];
-    for await (const item of response) {
-      counts.push(item);
+    for await (const count of countsPage) {
+      counts.push(count);
     }
 
     return NextResponse.json({ inventory: counts });
   } catch (err: any) {
-    console.error('[SQUARE_INVENTORY_SKU]', err);
+    console.error('[SQUARE_INVENTORY_BY_SKU_ERROR]', err);
     return NextResponse.json({
       error: err.message || 'Failed to fetch inventory by SKU',
     }, { status: 500 });
