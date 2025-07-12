@@ -54,47 +54,47 @@ export default function FredDemoPage() {
     }
   }
 
-  return (
-    <div className="min-h-screen bg-black text-white flex">
-      {/* Sidebar menu */}
-      <aside className="w-48 bg-gray-800 p-4 space-y-4">
-        {stepLabels.map((label, i) => (
-          <button
-            key={i}
-            className={`w-full text-left px-3 py-2 rounded hover:bg-gray-700 ${
-              stepIndex === i ? 'bg-gray-700 font-bold' : ''
-            }`}
-            onClick={() => setStepIndex(i)}
-          >
-            {label} {completedSteps[i] && '✅'}
-          </button>
-        ))}
-      </aside>
+return (
+  <div className="min-h-screen bg-black text-white flex flex-col">
+    {/* Top Navbar */}
+    <nav className="sticky top-0 z-50 bg-gray-800 p-4 flex space-x-4 justify-center">
+      {stepLabels.map((label, i) => (
+        <button
+          key={i}
+          className={`px-4 py-2 rounded hover:bg-gray-700 ${
+            stepIndex === i ? 'bg-white text-black font-bold' : 'bg-gray-800 text-white'
+          }`}
+          onClick={() => setStepIndex(i)}
+        >
+          {label} {completedSteps[i] && '✅'}
+        </button>
+      ))}
+    </nav>
 
-      {/* Main content */}
-      <main className="flex-1 flex flex-row items-center justify-center p-6 relative">
-        <div className="relative flex flex-col items-center justify-center mr-10">
-          <FredContainer
-            message={stepLabels[stepIndex]}
-            flagA={false}
-            flagB={false}
-            className="absolute -top-24 left-1/2 transform -translate-x-1/2"
-          >
-            <></>
-          </FredContainer>
-        </div>
+    {/* Main content */}
+    <main className="flex-1 flex flex-row items-center justify-center p-6 relative">
+      <div className="relative flex flex-col items-center justify-center mr-10">
+        <FredContainer
+          message={stepLabels[stepIndex]}
+          flagA={false}
+          flagB={false}
+          className="absolute -top-24 left-1/2 transform -translate-x-1/2"
+        >
+          <></>
+        </FredContainer>
+      </div>
 
-        <div className="flex-1 p-6 max-w-2xl">
-            <>
-              {stepIndex === 0 && (<FredStart onComplete={() => updateCompletion(0)} />)}
-              {stepIndex === 1 && (<FredCombinedCustomizer onComplete={() => updateCompletion(1)} />)}
-              {stepIndex === 2 && <FredQuestionFour onComplete={() => updateCompletion(2)} />}
-              {stepIndex === 3 && <FredQuestionFive onSubmit={() => updateCompletion(3)} />}
-              {stepIndex === 4 && <WaitlistInput onComplete={() => updateCompletion(4)} />}
-            </>
-        
-        </div>
-      </main>
-    </div>
-  )
+      <div className="flex-1 p-6 max-w-2xl">
+        <>
+          {stepIndex === 0 && <FredStart onComplete={() => updateCompletion(0)} />}
+          {stepIndex === 1 && <FredCombinedCustomizer onComplete={() => updateCompletion(1)} />}
+          {stepIndex === 2 && <FredQuestionFour onComplete={() => updateCompletion(2)} />}
+          {stepIndex === 3 && <FredQuestionFive onSubmit={() => updateCompletion(3)} />}
+          {stepIndex === 4 && <WaitlistInput onComplete={() => updateCompletion(4)} />}
+        </>
+      </div>
+    </main>
+  </div>
+)
+
 }
