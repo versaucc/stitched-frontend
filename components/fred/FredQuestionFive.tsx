@@ -68,20 +68,6 @@ export default function FredQuestionFive({
         className="w-full max-w-md h-32 p-3 rounded bg-white text-black"
       />
 
-      <div
-        onDragOver={(e) => e.preventDefault()}
-        onDragEnter={() => setDragging(true)}
-        onDragLeave={() => setDragging(false)}
-        onDrop={handleDrop}
-        className={`w-full max-w-md h-32 border-2 border-dashed rounded flex items-center justify-center ${
-          dragging ? 'border-green-400 bg-green-50' : 'border-gray-400'
-        }`}
-      >
-        {files.length === 0
-          ? 'Drag and drop files here'
-          : `${files.length} file${files.length > 1 ? 's' : ''} added`}
-      </div>
-
       <button
         onClick={handleSubmit}
         className="mt-6 px-6 py-2 bg-white text-black font-bold rounded hover:bg-gray-200"
