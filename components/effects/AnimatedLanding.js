@@ -37,7 +37,7 @@ export default function App() {
           setShowEnter(true)
         }, 200)
     } else if (clickCount === 1) {
-      router.push('/gallery')
+      router.push('/fred')
     }
   }
 

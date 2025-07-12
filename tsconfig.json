@@ -30,7 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "components/effects/AnimatedLanding.tsx"  ],
+, "components/effects/AnimatedLanding.tsx", "app/api/square-webhook/route.js", "app/api/square-inventory/route.js", "app/api/lib/square.js"  ],
   "exclude": [
     "node_modules"
   ]
