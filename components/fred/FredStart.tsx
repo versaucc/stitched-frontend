@@ -3,62 +3,58 @@
 import { useState } from 'react'
 import { supabase } from '../../lib/supabase'
 
-export default function FredStart({
-  onComplete,
-}: {
-  onComplete: (sessionId: string) => void
-}) {
+export default function FredStart({ onComplete }: { onComplete: () => void }) {
   const [name, setName] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [status, setStatus] = useState<'idle' | 'creating' | 'done' | 'error'>('idle')
 
   const handleStart = async () => {
-    if (!name.trim()) {
-      setError('Please enter your name.')
-      return
-    }
+    if (!name.trim()) return
+    setStatus('creating')
 
-    setLoading(true)
-    setError(null)
+    const UID = '92b7e17d-ad61-4ec2-89f6-b6347db40c5e' // fixed UID you provided
 
-    const { data, error } = await supabase
-      .from('custom_orders')
-      .insert({ user_name: name, step_ct: 0, saved: false, ordered: false })
-      .select()
-      .single()
-
-    setLoading(false)
+    const { data, error } = await supabase.from('custom_orders').insert({
+      name: name.trim(),
+      step_ct: 0,
+      saved: false,
+      ordered: false,
+      UID
+    }).select().single()
 
     if (error || !data?.session_id) {
-      setError('Failed to start session.')
+      console.error('❌ Failed to create custom order row:', error)
+      setStatus('error')
       return
     }
 
     localStorage.setItem('custom_session_id', data.session_id)
-    onComplete(data.session_id)
+    setStatus('done')
+    onComplete()
   }
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 mt-8">
-      <label htmlFor="userName" className="text-white text-lg font-semibold">
-        Enter your name to begin customizing:
+    <div className="w-full flex flex-col items-center gap-4">
+      <label htmlFor="name" className="text-sm text-white">
+        First, what's your name?
       </label>
       <input
-        id="userName"
+        id="name"
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="p-2 rounded border border-white bg-black text-white w-64"
         placeholder="Your name"
+        className="px-3 py-2 rounded bg-white text-black w-64"
       />
       <button
         onClick={handleStart}
-        disabled={loading}
-        className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 disabled:opacity-50"
+        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+        disabled={status === 'creating'}
       >
-        {loading ? 'Starting...' : 'Start Custom Pair'}
+        {status === 'creating' ? 'Creating...' : 'Start Custom Pair'}
       </button>
-      {error && <p className="text-red-400">{error}</p>}
+      {status === 'error' && (
+        <p className="text-sm text-red-400">Something went wrong. Try again.</p>
+      )}
     </div>
   )
 }
