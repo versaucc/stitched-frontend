@@ -64,14 +64,16 @@ export async function POST(req: NextRequest) {
         productTypes: ['REGULAR'],
       });
 
-      const jeansItem = searchResult.items?.[0];
-      if (!jeansItem) {
-        return NextResponse.json({ error: 'Square item "Jeans 1" not found' }, { status: 404 });
-      }
+    const jeansItem = searchResult.items?.[0];
 
-      const fullCatalog = await squareClient.catalog.batchGet({
-        objectIds: [jeansItem.id],
-      });
+    if (!jeansItem?.id) {
+      return NextResponse.json({ error: 'Square item "Jeans 1" not found' }, { status: 404 });
+    }
+
+    const fullCatalog = await squareClient.catalog.batchGet({
+      objectIds: [jeansItem.id], // ✅ now safe to use
+    });
+
 
       const matchingVariation = fullCatalog.objects
         ?.filter((obj) => obj.type === 'ITEM_VARIATION')
