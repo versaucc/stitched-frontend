@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
-
 import FredGreeting from '../../components/fred/FredGreeting'
-import FredCombinedCustomizer from '../../components/fred/FredCombinedCustomizer'
+import FredCombinedCustomizer from '../../components/fred/FredCombinedCustomizer' // This is the new merged step
 import FredQuestionFour from '../../components/fred/FredQuestionFour'
 import FredQuestionFive from '../../components/fred/FredQuestionFive'
 import FredContainer from '../../components/fred/FredContainer'
@@ -48,7 +47,10 @@ export default function FredDemoPage() {
       }).eq('session_id', sessionId)
     }
 
-    // Don't auto-advance
+    // Proceed to next step
+    if (index < stepLabels.length - 1) {
+      setStepIndex(index + 1)
+    }
   }
 
   return (
@@ -61,6 +63,7 @@ export default function FredDemoPage() {
             className={`w-full text-left px-3 py-2 rounded hover:bg-gray-700 ${
               stepIndex === i ? 'bg-gray-700 font-bold' : ''
             }`}
+            disabled={i > 0 && !completedSteps[i - 1]}
             onClick={() => setStepIndex(i)}
           >
             {label} {completedSteps[i] && '✅'}
@@ -71,12 +74,16 @@ export default function FredDemoPage() {
       {/* Fred and Question Display */}
       <main className="flex-1 flex flex-row items-center justify-center p-6 relative">
         <div className="relative flex flex-col items-center justify-center mr-10">
-          <FredContainer
-            message={stepLabels[stepIndex]}
-            flagA={false}
-            flagB={false}
-            className="absolute -top-24 left-1/2 transform -translate-x-1/2"
-          />
+        <FredContainer
+          message={stepLabels[stepIndex]}
+          flagA={false}
+          flagB={false}
+          className="absolute -top-24 left-1/2 transform -translate-x-1/2"
+        >
+          {/* If you don’t want to show anything inside, pass an empty fragment */}
+          <></>
+        </FredContainer>
+
         </div>
 
         <div className="flex-1 p-6 max-w-2xl">
@@ -90,15 +97,9 @@ export default function FredDemoPage() {
             />
           ) : (
             <>
-              {stepIndex === 0 && (
-                <FredCombinedCustomizer onComplete={() => updateCompletion(0)} />
-              )}
-              {stepIndex === 1 && (
-                <FredQuestionFour onComplete={() => updateCompletion(1)} />
-              )}
-              {stepIndex === 2 && (
-                <FredQuestionFive onSubmit={() => updateCompletion(2)} />
-              )}
+              {stepIndex === 0 && <FredCombinedCustomizer onComplete={() => updateCompletion(0)} />}
+              {stepIndex === 1 && <FredQuestionFour onComplete={() => updateCompletion(1)} />}
+              {stepIndex === 2 && <FredQuestionFive onSubmit={() => updateCompletion(2)} />}
             </>
           )}
         </div>
