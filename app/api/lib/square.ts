@@ -5,7 +5,7 @@
  *   SQUARE_ACCESS_TOKEN   –  Production access token
  *   SQUARE_ENV            –  "production" | "sandbox"
  */
-import { Client, Environment } from '@square/square';
+import { Client, Environment } from '@square';
 
 const env = process.env.SQUARE_ENV === 'production'
   ? Environment.Production
