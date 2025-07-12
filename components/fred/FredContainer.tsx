@@ -22,15 +22,12 @@ export default function FredContainer({
         <img
           src="/fred/fred-wave.png"
           alt="Fred"
-          className="w-56 h-auto"
+          className="w-112 h-auto"
         />
-        <div className="bg-white text-black p-3 rounded shadow-md mt-2 max-w-xs text-sm">
-          {message}
-        </div>
       </div>
 
       {/* Content of the walkthrough step */}
-      <div className="ml-[160px]">
+      <div className="ml-[250px]">
         {children}
       </div>
     </div>
