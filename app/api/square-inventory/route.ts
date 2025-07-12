@@ -85,19 +85,21 @@ export async function POST(req: NextRequest) {
 
       const catalogObjectId = matchingVariation.id;
 
-      // Adjust inventory via Square
-      await squareClient.inventory.adjustInventory({
-        body: {
-          idempotencyKey: crypto.randomUUID(),
-          adjustment: {
-            catalogObjectId,
-            locationId: process.env.SQUARE_LOCATION_ID!,
-            fromState: 'NONE',
-            toState: 'IN_STOCK',
-            quantity: quantity.toString(),
-          },
+  await squareClient.inventory.batchCreateChanges({
+    idempotencyKey: crypto.randomUUID(),
+    changes: [
+      {
+        type: 'PHYSICAL_COUNT',
+        physicalCount: {
+          catalogObjectId: size,
+          locationId: process.env.SQUARE_LOCATION_ID!,
+          state: 'IN_STOCK',
+          quantity: quantity.toString(),
         },
-      });
+      },
+    ],
+  });
+
     }
 
     return NextResponse.json({ message: 'Inventory synced', data });
