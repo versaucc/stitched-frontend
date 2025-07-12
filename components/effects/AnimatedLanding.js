@@ -275,7 +275,7 @@ export default function App() {
 
       {/* Fade-in Enter Text */}
       <div
-        className={`top-100 z-10 text-white w-145 h-290 transition-opacity duration-500 ${
+        className={`top-100 z-10 text-white w-145 h-auto transition-opacity duration-500 ${
           showEnter ? 'opacity-100' : 'opacity-0'
         }`}
       >
