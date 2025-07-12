@@ -65,20 +65,25 @@ export default function FredCombinedCustomizer({ onComplete }: { onComplete: () 
   return (
     <div className="w-full flex flex-col items-center gap-8 mt-8">
 
-      {/* ─── Silhouettes ─── */}
-      <div className="flex justify-center gap-8">
-        {SILHOUETTE_OPTIONS.map((opt) => (
-          <div
-            key={opt.id}
-            onClick={() => setSilhouette(opt.id)}
-            className={`cursor-pointer border-4 rounded transition-all ${
-              silhouette === opt.id ? 'border-green-400 scale-105' : 'border-transparent hover:border-gray-300'
-            }`}
-          >
-            <Image src={opt.src} alt={opt.alt} width={90} height={180} />
-          </div>
-        ))}
-      </div>
+    {/* ─── Silhouettes ─── */}
+    <div className="flex justify-center gap-8">
+    {SILHOUETTE_OPTIONS.map((opt) => (
+        <div
+        key={opt.id}
+        onClick={() => setSilhouette(opt.id)}
+        className={`cursor-pointer border-4 rounded transition-all flex flex-col items-center ${
+            silhouette === opt.id ? 'border-green-400 scale-105' : 'border-transparent hover:border-gray-300'
+        }`}
+        >
+        {/* Label above the image */}
+        <p className="text-white text-sm mb-2">{opt.alt}</p>
+
+        {/* Image */}
+        <Image src={opt.src} alt={opt.alt} width={90} height={180} />
+        </div>
+    ))}
+    </div>
+
 
       {/* ─── Controls Layout ─── */}
       <div className="flex flex-col md:flex-row justify-center w-full max-w-5xl gap-8">

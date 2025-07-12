@@ -45,16 +45,6 @@ export default function FredStart({ onComplete }: { onComplete: () => void }) {
         placeholder="Your name"
         className="px-3 py-2 rounded bg-white text-black w-64"
       />
-      <button
-        onClick={handleStart}
-        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-        disabled={status === 'creating'}
-      >
-        {status === 'creating' ? 'Creating...' : 'Start Custom Pair'}
-      </button>
-      {status === 'error' && (
-        <p className="text-sm text-red-400">Something went wrong. Try again.</p>
-      )}
     </div>
   )
 }

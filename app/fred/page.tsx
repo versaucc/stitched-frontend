@@ -10,7 +10,7 @@ import FredQuestionFive from '../../components/fred/FredQuestionFive'
 import FredContainer from '../../components/fred/FredContainer'
 import WaitlistInput from '../../components/fred/WaitlistInput'
 
-const stepLabels = ['Start', 'Fit & Wash', 'Patches', 'Final Notes', 'Waitlist']
+const stepLabels = ['Start', 'Fit & Wash', 'Patches', 'Notes', 'Waitlist']
 
 export default function FredDemoPage() {
   const [stepIndex, setStepIndex] = useState(0)

@@ -1,39 +1,48 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 
 export default function WaitlistInput({ onComplete }: { onComplete: () => void }) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>('idle')
+  const router = useRouter()
 
   useEffect(() => {
-    const stored = localStorage.getItem('waitlist_email')
+    const stored = localStorage.getItem('email')
     if (stored) setEmail(stored)
   }, [])
 
   const handleSubmit = async () => {
-    setStatus('submitting')
-    localStorage.setItem('waitlist_email', email)
+    if (!email.trim()) return
 
-    const { error } = await supabase.from('waitlist').insert({ email })
+    setStatus('submitting')
+    localStorage.setItem('email', email.trim())
+
+    const { error } = await supabase.from('emails').insert({ emails: email.trim() })
 
     if (error) {
-      console.error('❌ Failed to insert waitlist email:', error)
+      console.error('❌ Failed to insert email:', error)
       setStatus('error')
     } else {
       setStatus('submitted')
-      onComplete() // ✅ tell parent walkthrough to mark this step complete and clear session
+      onComplete?.()
+
+      // Redirect to homepage after 4 seconds
+      setTimeout(() => {
+        router.push('/')
+      }, 4000)
     }
   }
 
   return (
     <div className="space-y-2">
-      <label htmlFor="waitlist-email" className="text-sm text-white block">
+      <label htmlFor="email" className="text-sm text-white block">
         Give us your email to join the waitlist!
       </label>
       <input
-        id="waitlist-email"
+        id="email"
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}

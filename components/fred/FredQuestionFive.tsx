@@ -68,12 +68,6 @@ export default function FredQuestionFive({
         className="w-full max-w-md h-32 p-3 rounded bg-white text-black"
       />
 
-      <button
-        onClick={handleSubmit}
-        className="mt-6 px-6 py-2 bg-white text-black font-bold rounded hover:bg-gray-200"
-      >
-        Preview Order
-      </button>
     </div>
   )
 }
