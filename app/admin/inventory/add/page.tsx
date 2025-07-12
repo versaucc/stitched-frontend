@@ -29,15 +29,21 @@ export default function InventoryEditPage() {
     // Optional: preload data here if editing existing item (based on URL param or selection)
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setMessage("");
+    setMessage('');
+
+
+
 
     try {
       const method = editingId ? "PATCH" : "POST";
