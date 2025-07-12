@@ -1,42 +1,30 @@
-/**
- * Minimal webhook receiver.
- *  – Verifies the Square signature.
- *  – Echoes event type for observability.
- *
- *  Add the following env-vars:
- *    SQUARE_WEBHOOK_SIGNATURE_KEY
- *    SQUARE_WEBHOOK_URL     (exact URL configured in Square Dashboard)
- */
+// app/api/square-webhook/route.js
+import { NextResponse } from 'next/server';
+import crypto from 'node:crypto';
 
-import { NextRequest, NextResponse } from 'next/server';
-import crypto from 'crypto';
+const WEBHOOK_SECRET = process.env.SQUARE_WEBHOOK_SIGNATURE_KEY;
 
-const sigKey = process.env.SQUARE_WEBHOOK_SIGNATURE_KEY!;
-const webhookUrl = process.env.SQUARE_WEBHOOK_URL!;
-
-function isValid(payload: string, sigHeader: string | null) {
-  if (!sigHeader) return false;
-
+/** quick-and-dirty validator; follow the full Square guide in production */
+function isValid(rawBody, headerSig) {
+  if (!WEBHOOK_SECRET || !headerSig) return false;
   const hmac = crypto
-    .createHmac('sha1', sigKey)
-    .update(webhookUrl + payload)
+    .createHmac('sha1', WEBHOOK_SECRET)
+    .update(rawBody)
     .digest('base64');
-
-  return crypto.timingSafeEqual(Buffer.from(hmac), Buffer.from(sigHeader));
+  return crypto.timingSafeEqual(Buffer.from(headerSig), Buffer.from(hmac));
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
   const raw = await req.text();
   const sig = req.headers.get('x-square-signature');
 
   if (!isValid(raw, sig)) {
-    return NextResponse.json({ error: 'Signature mismatch' }, { status: 400 });
+    return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
   }
 
   const event = JSON.parse(raw);
-  console.log('[Square Webhook]', event.type, event.event_id);
-
-  // ──> Add any custom logic (e.g. sync to DB) here
+  console.log('[Square Webhook]', event.type);
+  // TODO: react to event if you need to
 
   return NextResponse.json({ received: true });
 }
