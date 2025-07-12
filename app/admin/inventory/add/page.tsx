@@ -86,8 +86,13 @@ export default function InventoryEditPage() {
         });
       }
     } catch (err) {
-      setMessage(`❌ ${err.message}`);
-    } finally {
+        if (err instanceof Error) {
+          setMessage(`❌ ${err.message}`);
+      } else {
+          setMessage('❌ Unknown error occurred');
+      }
+}
+ finally {
       setSubmitting(false);
     }
   };
