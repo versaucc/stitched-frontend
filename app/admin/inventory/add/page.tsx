@@ -130,7 +130,7 @@ const [form, setForm] = useState<InventoryForm>({
                 id={key}
                 name={key}
                 type={key === "quantity" || key === "cost" || key === "price" ? "number" : "text"}
-                value={form[key]}
+                value={form[key] ?? ''}
                 onChange={handleChange}
                 className="w-full text-black border p-2 rounded"
               />
