@@ -56,7 +56,7 @@ export default function InventoryEditPage() {
           ...form,
           cost: parseFloat(form.cost),
           price: parseFloat(form.price),
-          quantity: parseInt(form.quantity),
+          quantity: form.quantity,
           patches: JSON.parse(form.patches || "{}"),
         }),
       });
