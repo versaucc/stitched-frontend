@@ -1,7 +1,0 @@
-# requirements.txt
-python=3.11
-squareup
-fastapi==0.110.0
-uvicorn==0.29.0
-supabase==2.4.4
-python-dotenv==1.0.1   # optional for local dev
