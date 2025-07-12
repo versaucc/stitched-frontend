@@ -3,23 +3,42 @@
 import { useState, useEffect } from "react";
 
 export default function InventoryEditPage() {
-  const [form, setForm] = useState({
-    id: null,
-    name: "",
-    SKU: "",
-    quantity: 0,
-    status: "",
-    price: "",
-    cost: "",
-    category: "",
-    brand: "",
-    wash: "",
-    size: "",
-    description: "",
-    image_url: "",
-    square_item_id: "",
-    patches: "{}",
-  });
+    type InventoryForm = {
+      [key: string]: string | number | null; // ✅ this enables dynamic key access
+      id: null;
+      name: string;
+      SKU: string;
+      quantity: number;
+      status: string;
+      price: string;
+      cost: string;
+      category: string;
+      brand: string;
+      wash: string;
+      size: string;
+      description: string;
+      image_url: string;
+      square_item_id: string;
+      patches: string;
+    };
+
+const [form, setForm] = useState<InventoryForm>({
+  id: null,
+  name: '',
+  SKU: '',
+  quantity: 0,
+  status: '',
+  price: '',
+  cost: '',
+  category: '',
+  brand: '',
+  wash: '',
+  size: '',
+  description: '',
+  image_url: '',
+  square_item_id: '',
+  patches: '',
+});
 
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
