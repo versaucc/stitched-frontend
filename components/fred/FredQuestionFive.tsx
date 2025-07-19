@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
 import { FinalizeOrder } from './FinalizeOrder'
 import { supabase } from '../../lib/supabase'
 
@@ -30,7 +29,6 @@ export default function FredQuestionFive({
       return
     }
 
-    // Convert filenames (or eventually URLs if uploading to storage)
     const fileNames = files.map(file => file.name)
 
     const { error } = await supabase
@@ -48,13 +46,10 @@ export default function FredQuestionFive({
       return
     }
 
-    // Optional tracking for parent
     onSubmit(comment, files)
 
-    // Finalize the order (e.g., log status, clear working session, etc.)
     await FinalizeOrder()
 
-    // Redirect
     router.push('/fred/summary')
   }
 
@@ -67,6 +62,13 @@ export default function FredQuestionFive({
         onChange={(e) => setComment(e.target.value)}
         className="w-full max-w-md h-32 p-3 rounded bg-white text-black"
       />
+
+      <button
+        onClick={handleSubmit}
+        className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded font-semibold"
+      >
+        Preview Order
+      </button>
 
     </div>
   )

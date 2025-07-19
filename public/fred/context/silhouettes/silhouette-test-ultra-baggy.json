@@ -4,7 +4,7 @@
     "fit": "ultra baggy / parachute",
     "waist": "mid-rise",
     "inseam": "long, reaches shoe tops",
-    "cuff": "wide opening, stacks over sneakers",
+    "cuff": "wide opening",
     "color": "mid-wash blue",
 
     "texture": {
@@ -25,7 +25,7 @@
     },
 
     "silhouette_style": {
-      "ultra_baggy": "Extreme volume from hip to ankle, often billowing or stacking heavily, emphasizing exaggerated streetwear proportions."
+      "ultra_baggy": "Extreme volume from hip to ankle, often billowing, emphasizing exaggerated streetwear proportions."
     },
 
     "shoe_color": "black",

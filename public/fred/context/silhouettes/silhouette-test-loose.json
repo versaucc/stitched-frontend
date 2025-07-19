@@ -4,7 +4,7 @@
     "fit": "ultra baggy / parachute",
     "waist": "mid-rise",
     "inseam": "long, reaches shoe tops",
-    "cuff": "wide opening, stacks over sneakers",
+    "cuff": "wide opening, touches top of sneakers",
     "color": "mid-wash blue",
 
     "texture": {
@@ -20,7 +20,7 @@
     "silhouette": {
       "volume": "high",
       "taper": "strong taper toward waist",
-      "outline_behavior": "billows out from hips and stacks densely around ankles",
+      "outline_behavior": "billows out from hips",
       "pose_impact": "fabric movement reacts heavily to posture, showcasing folds and drape"
     },
 

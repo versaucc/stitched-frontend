@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 
+import { setStoredSession } from '../../lib/sessionManager'
+import { CustomPairSession } from '../../types/customPairSession'
+
+
 export default function FredLoadPair({ onComplete }: { onComplete: () => void }) {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<any>(null)
@@ -59,81 +63,109 @@ export default function FredLoadPair({ onComplete }: { onComplete: () => void })
   const handleStartNew = async () => {
     if (!pairName) return
 
-    const session_id = crypto.randomUUID()
-
-    // Fetch user's name from profile
     const { data: profile, error: profileErr } = await supabase
       .from('profiles')
       .select('name, UID, phone, instagram')
       .eq('UID', user.id)
       .single()
 
-    if (profileErr) {
-      console.warn('Profile not found:', profileErr.message)
-    } else {
-
-    const { data, error } = await supabase.from('custom_orders').insert([
-      {
-        user_id: user.id,
-        email: user.email,
-        name: profile.name,
-        pair_name: pairName,
-        saved : false, 
-        UID : profile.UID,
-        ordered : false,
-        phone : profile.phone, 
-        instagram : profile.instagram || '',
-        session_id,
-      }
-    ]).select().single()
-    
-    if (error) {
-      console.error('Error creating order:', error)
+    if (profileErr || !profile) {
+      console.warn('Profile not found:', profileErr?.message)
       return
-    } 
+    }
 
-    localStorage.setItem('current_order_id', data.id)
-    localStorage.setItem('custom_session_id', session_id)
+    const { data, error } = await supabase.from('custom_orders').insert([{
+      user_id: user.id,
+      email: user.email,
+      name: profile.name,
+      UID: profile.UID,
+      phone: profile.phone,
+      instagram: profile.instagram || '',
+      pair_name: pairName,
+      saved: false,
+      ordered: false,
+      step_ct: 0,
+    }]).select().single()
 
-    await supabase.from('profiles').update({
-      custom_session_id: session_id,
-      custom_orders_working: data.id,
-    }).eq('id', user.id)
+    if (error || !data || !data.session_id) {
+      console.error('Error creating order or missing session_id:', error)
+      return
+    }
+
+    const sessionObj: CustomPairSession = {
+      session_id: data.session_id, // ✅ from Supabase
+      user_id: user.id,
+      pair_name: pairName,
+      step_ct: 0,
+      saved: false,
+      ordered: false,
+      special_requests: '',
+      uploaded_files: [],
+      patches: [],
+    }
+
+    setStoredSession(sessionObj)
+
+    await supabase
+      .from('profiles')
+      .update({
+        custom_session_id: data.session_id, // ✅ use correct value
+        custom_orders_working: data.id,
+      })
+      .eq('id', user.id)
 
     onComplete()
-    }
   }
 
-  const handleLoadExisting = async (orderId: string) => {
-    localStorage.setItem('current_order_id', orderId)
 
+
+  const handleLoadExisting = async (orderId: string) => {
     const { data: order, error } = await supabase
       .from('custom_orders')
-      .select('session_id')
+      .select('*')
       .eq('id', orderId)
       .single()
 
-    if (error) {
+    if (error || !order) {
       console.error('Error fetching existing order:', error)
+      return
     }
 
-    if (order?.session_id) {
-      localStorage.setItem('custom_session_id', order.session_id)
+    const sessionObj: CustomPairSession = {
+      session_id: order.session_id,
+      user_id: order.user_id,
+      pair_name: order.pair_name,
+      step_ct: order.step_ct || 0,
+      saved: order.saved,
+      ordered: order.ordered,
+      question1_result: order.question1_result,
+      question2_result: order.question2_result,
+      question3_result: order.question3_result,
+      patches: order.patches || [],
+      special_requests: order.special_requests,
+      uploaded_files: order.uploaded_files || [],
+      notes: order.notes,
+      created_at: order.created_at,
+    }
 
-      await supabase.from('profiles').update({
+    setStoredSession(sessionObj)
+
+    await supabase
+      .from('profiles')
+      .update({
         custom_session_id: order.session_id,
         custom_orders_working: orderId,
-      }).eq('id', user.id)
-    }
+      })
+      .eq('id', user.id)
 
     onComplete()
   }
+
 
   if (loading) return <div className="text-white text-center">Loading saved pairs...</div>
 
   return (
     <div className="flex flex-col items-center justify-center text-white space-y-6">
-      <h2 className="text-2xl font-bold">Welcome back!</h2>
       {user?.email && (
         <p className="text-sm text-gray-400 -mt-4">Signed in under {user.email}</p>
       )}

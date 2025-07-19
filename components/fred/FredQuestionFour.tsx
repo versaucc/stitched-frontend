@@ -94,7 +94,7 @@ export default function FredQuestionFour({ onComplete }: { onComplete: () => voi
   )
 
   return (
-    <div className="w-full flex flex-col items-center justify-center space-y-6">
+    <div className="w-full flex flex-col items-center justify-center space-y-3">
       {/* Toggle View */}
       <div className="space-x-4">
         <button
@@ -112,7 +112,7 @@ export default function FredQuestionFour({ onComplete }: { onComplete: () => voi
       </div>
 
       {/* Image + Selectors */}
-      <div className="relative w-full max-w-md aspect-[3/4]">
+      <div className="relative w-[60%] max-w-md aspect-[3/4]">
         <Image
           src={
             view === 'front'
