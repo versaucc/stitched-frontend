@@ -1,0 +1,36 @@
+
+
+TODO: 
+
+    FRED 3D
+    Shop page
+    warehouse sketch 
+    fred 1 dimension
+    home page
+
+
+    inspo: 
+        Cart slides out from right hand side.
+        Sound part of desing? Music bar? (plane jane)
+        logo and car - nothing competing for attention. 
+        Product images flow down the screen 
+
+        Images: 
+            Add transparent images over text 
+            Add blur. 
+            Floating UI. 
+        
+    3d design: spline.design 
+
+
+    derschutes.com - nutty
+    breakdown the method - specifically the entrance
+
+
+    update: 3:41 AM 
+        - Tweaking lookbook styling 
+        Need to: 
+            - commit to vercel and test mobile styling
+            - get more photos
+            - make cart box pretty 
+            - Use that one tool for the cart box -> slide out menu (global)
