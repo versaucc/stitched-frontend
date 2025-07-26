@@ -126,7 +126,6 @@ useEffect(() => {
             message={stepLabels[stepIndex]}
             flagA={false}
             flagB={false}
-            className="absolute-top-24 left-1/2 transform -translate-x-1/2"
           >
             <></>
           </FredContainer>
