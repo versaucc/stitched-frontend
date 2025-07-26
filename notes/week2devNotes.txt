@@ -34,3 +34,18 @@ TODO:
             - get more photos
             - make cart box pretty 
             - Use that one tool for the cart box -> slide out menu (global)
+
+    update: 6:10 AM 
+        - Lookbook padding is dialed. Very pleasing 
+        - commit to vercel 
+        Need to: 
+            - Allow click input on grid to view 
+            - Add titles and link to archive. 
+            - Borders? Fonts? 
+            - Animate UI? 
+            - any dither? 
+        Closing lookbook for now...
+
+    Next: 6:32 AM - EOD :
+
+        
