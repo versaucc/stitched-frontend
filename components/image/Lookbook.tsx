@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Collection {
   id: number;
@@ -29,20 +30,21 @@ export default function Lookbook({ collections }: LookbookProps) {
 
       {/* ─── LOOKBOOK CONTENT ─────────────────────────────────── */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        
         {/* Hero image */}
             <section
             className="
                 relative
-                mx-auto                 /* center horizontally */
-                w-[35%]                  /* 55% width on lg+ (you can scope with lg:) */
-                lg:pr-[5%] /* padding-inline: clamp(min, preferred %, max) */
-                h-[calc(75vh-4rem)]                 /* or whatever height you need */
+                mx-auto              /* center horizontally */
+                w-[35%]              /* 55% width on lg+ (you can scope with lg:) */
+                lg:px-[clamp(0rem, 5%, 5rem) ] /* padding-inline: clamp(min, preferred %, max) */
+                h-[calc(80vh-4rem)]                 /* or whatever height you need */
                 
             "
             >
         <Image
             src={`/lookbook/collection-${current.id}/${current.images[0]}`}
-            alt={`Collection ${current.id} hero`}
+            alt={`Collection ${current.id} main`}
             fill
             className="object-cover"
             priority
@@ -57,9 +59,8 @@ export default function Lookbook({ collections }: LookbookProps) {
             flex flex-row overflow-x-auto overflow-y-hidden gap-0
             /* DESKTOP: grid 4-cols, scroll vertically */
             lg:grid lg:grid-cols-4 lg:gap-0 lg:overflow-y-auto lg:overflow-x-hidden
-            lg:px-[2%] /* padding-inline: clamp(min, preferred %, max) */
             /* height matches hero */
-            h-[calc(75vh-4rem)]
+            h-[calc(80vh-4rem)]
             
           "
         >
@@ -74,6 +75,9 @@ export default function Lookbook({ collections }: LookbookProps) {
                 overflow-hidden
               "
             >
+
+            <div className="flex justify-end mb-2">
+            </div>
               <Image
                 src={`/lookbook/collection-${current.id}/${img}`}
                 alt={`Collection ${current.id} image ${idx}`}
