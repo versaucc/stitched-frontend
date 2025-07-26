@@ -2,7 +2,7 @@
 import MinimalNavbar from '../components/navbar/MinimalNavbar'
 import SilhouetteAnimation from '../components/backgrounds/SilhouetteAnimation'
 
-export default function LandingPage() {
+export default function HomePage() {
   return (
     <div
       className="
