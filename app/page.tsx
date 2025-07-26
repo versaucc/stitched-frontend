@@ -1,5 +1,4 @@
 // app/page.tsx
-import MatrixRain from '../components/backgrounds/MatrixRain'
 import MinimalNavbar from '../components/navbar/MinimalNavbar'
 import SilhouetteAnimation from '../components/backgrounds/SilhouetteAnimation'
 

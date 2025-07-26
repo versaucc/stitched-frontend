@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "components/effects/AnimatedLanding.tsx"  ],
+, "components/effects/AnimatedLanding.tsx", "../lock/MatrixRain.tsx"  ],
   "exclude": [
     "node_modules"
   ]
