@@ -29,13 +29,13 @@ export default function Lookbook({ collections }: LookbookProps) {
     >
 
       {/* ─── LOOKBOOK CONTENT ─────────────────────────────────── */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden gap-10">
         
         {/* Hero image */}
             <section
             className="
                 relative
-                mx-auto              /* center horizontally */
+                ml-[9vw]              /* center horizontally */
                 w-[35%]              /* 55% width on lg+ (you can scope with lg:) */
                 lg:px-[clamp(0rem, 5%, 5rem) ] /* padding-inline: clamp(min, preferred %, max) */
                 h-[calc(80vh-4rem)]                 /* or whatever height you need */
@@ -54,7 +54,7 @@ export default function Lookbook({ collections }: LookbookProps) {
         {/* Thumbnails: flex-row scrollable on mobile, grid on desktop */}
         <nav
           className="
-            w-[45%]
+            w-[35%]
             /* MOBILE: 1-row scroll */
             flex flex-row overflow-x-auto overflow-y-hidden gap-0
             /* DESKTOP: grid 4-cols, scroll vertically */

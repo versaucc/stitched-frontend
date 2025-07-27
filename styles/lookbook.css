@@ -1,0 +1,94 @@
+/* styles/lookbook.css */
+
+/* ───── Page Layout ───── */
+.lookbook-page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+}
+
+/* Sidebar (logo + cart) */
+.lookbook-sidebar {
+  flex: 0 0 20%;
+  min-width: 240px;
+  padding: 1rem;
+}
+
+/* Main column: header + content */
+.lookbook-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header above the hero image */
+.lookbook-header-container {
+  padding: 0.5rem 1rem;
+  margin-bottom: 3px;  /* gap to content */
+}
+
+/* Hero + archive container */
+.lookbook-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Hero section */
+.lookbook-hero {
+  position: relative;
+  flex: 1;
+  max-width: 60%;
+  margin: 0 auto;
+  height: calc(80vh - 4rem); /* adjust to taste */
+}
+
+/* ───── LookbookHeader (reuse your existing styles) ───── */
+/* .lookbook-header, .lookbook-title, .lookbook-subtext */
+/* If you already have these in lookbook.css from earlier, no need to repeat. */
+
+/* ───── LookbookArchive ───── */
+.lookbook-archive {
+  flex: 0 0 45%;
+  border-left: 1px solid #fff;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Archive header with arrow */
+.lookbook-archive-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.875rem;
+  text-transform: lowercase;
+  text-decoration: underline;
+  margin-bottom: 0.5rem;
+}
+
+/* Next arrow button */
+.archive-next {
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0 0.25rem;
+  cursor: pointer;
+}
+
+/* Thumbnails grid */
+.lookbook-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.5rem;
+}
+
+/* Each thumbnail */
+.archive-thumb {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}

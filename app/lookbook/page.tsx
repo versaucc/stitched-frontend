@@ -1,5 +1,5 @@
 // app/lookbook/page.tsx
-import Lookbook from '../../components/image/Lookbook'
+import Lookbook from '../../components/lookbook/Lookbook'
 import MinimalNavbar from '../../components/navbar/MinimalNavbar'
 import fs from 'fs'
 import path from 'path'
