@@ -1,0 +1,31 @@
+Global: 
+    -Privacy policy type deal footer
+    - Account type deal
+
+
+Home page : 
+    -sizing for nav box
+    -sizing for animation 
+
+Shop: 
+    - Individual product slugs
+    - Text highlighting 
+    - Cart box
+
+Custom page: 
+    -product photo grid 
+    -contact button 
+    -redirect to fred 
+
+Fred: 
+    - "Coming Soon" 
+
+Account page: 
+    - From scratch pretty much
+
+Stripe 
+Supa 
+Logging data 
+Account ease of use 
+
+Testing: on mobile and various screen size

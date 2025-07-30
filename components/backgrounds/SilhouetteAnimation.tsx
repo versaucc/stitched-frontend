@@ -9,7 +9,7 @@ import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
 gsap.registerPlugin(DrawSVGPlugin)
 
 // This import points to your file in /public/vectors/stitched-silhouette-vector.svg
-import Silhouette from '../../public/vectors/stitched-silhouette-vector.svg'
+import Silhouette from '../../public/vectors/home-page-vector-black-red.svg'
 
 export default function SilhouetteAnimation() {
   // ref to the top-level <svg> that SVGR gives us
@@ -25,8 +25,8 @@ export default function SilhouetteAnimation() {
         //
         // ── CONFIGURE THESE ───────────────────────────────────────────────
         //
-        const drawDuration  = 20  // seconds each path takes to draw
-        const totalStagger  = 20   // total seconds to stagger across all paths
+        const drawDuration  = 10  // seconds each path takes to draw
+        const totalStagger  = 5   // total seconds to stagger across all paths
         const animationEase = 'power1.out'
         //
         // ───────────────────────────────────────────────────────────────────

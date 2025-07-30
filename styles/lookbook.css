@@ -6,6 +6,7 @@
   min-height: 100vh;
   background: #000;
   color: #fff;
+  overflow: hidden;
 }
 
 /* Sidebar (logo + cart) */
@@ -15,20 +16,40 @@
   padding: 1rem;
 }
 
-/* Main column: header + content */
+/* Main column: header + content + footer */
 .lookbook-main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Header above the hero image */
+/* Header container */
 .lookbook-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 1rem;
   margin-bottom: 3px;  /* gap to content */
 }
 
-/* Hero + archive container */
+/* Archive link in header */
+.lookbook-archive-link {
+  text-transform: lowercase;
+  text-decoration: underline;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+/* Model info text box */
+.lookbook-model-info {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+/* Hero + thumbnails container */
 .lookbook-content {
   flex: 1;
   display: flex;
@@ -41,54 +62,57 @@
   flex: 1;
   max-width: 60%;
   margin: 0 auto;
-  height: calc(80vh - 4rem); /* adjust to taste */
+  height: calc(80vh - 4rem);
 }
 
-/* ───── LookbookHeader (reuse your existing styles) ───── */
-/* .lookbook-header, .lookbook-title, .lookbook-subtext */
-/* If you already have these in lookbook.css from earlier, no need to repeat. */
-
-/* ───── LookbookArchive ───── */
-.lookbook-archive {
-  flex: 0 0 45%;
-  border-left: 1px solid #fff;
-  padding-left: 1rem;
+/* Thumbnails & next button column */
+.lookbook-thumbs {
+  flex: 0 0 40%;
   display: flex;
   flex-direction: column;
+  border-left: 1px solid #fff;
+  padding-left: 1rem;
   overflow-y: auto;
 }
 
-/* Archive header with arrow */
-.lookbook-archive-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: 0.875rem;
-  text-transform: lowercase;
-  text-decoration: underline;
-  margin-bottom: 0.5rem;
-}
-
-/* Next arrow button */
-.archive-next {
+/* “Next Collection” button */
+.lookbook-next-col {
+  align-self: flex-end;
   background: none;
   border: none;
   color: inherit;
-  padding: 0 0.25rem;
+  text-transform: lowercase;
+  text-decoration: underline;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
   cursor: pointer;
 }
 
-/* Thumbnails grid */
-.lookbook-archive-grid {
+/* Grid of thumbnail wrappers */
+.lookbook-thumb-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 0.5rem;
 }
 
-/* Each thumbnail */
-.archive-thumb {
+/* Individual thumbnail container */
+.thumb-wrapper {
+  position: relative;
   width: 100%;
   aspect-ratio: 1/1;
-  object-fit: cover;
-  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+/* Highlight the active thumb */
+.thumb-wrapper.active {
+  border-color: #fff;
+}
+
+/* Footer nav */
+.footer {
+  margin-top: 2px;      /* gap from content */
+  margin-left: 11vw; /* align with main content */
 }

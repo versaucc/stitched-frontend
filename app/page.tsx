@@ -13,8 +13,8 @@ export default function HomePage() {
     >
     <div
       className="
-        fixed              /* take it out of the flow and pin it */
-        top-0 left-[-15%]       /* to the very top-left */
+        absolute              /* take it out of the flow and pin it */
+        top-0         /* to the very top-left */
         h-full          /* full viewport height */
         w-auto             /* width auto (we let the SVG size itself) */
         overflow-hidden    /* chop off anything that sticks out */

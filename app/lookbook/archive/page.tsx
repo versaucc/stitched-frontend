@@ -1,6 +1,6 @@
 // app/lookbook/page.tsx
-import Lookbook from '../../components/lookbook/Lookbook'
-import MinimalNavbar from '../../components/navbar/MinimalNavbar'
+import LookbookArchive from '../../../components/lookbook/LookbookArchive'
+import MinimalNavbar from '../../../components/navbar/MinimalNavbar'
 import fs from 'fs'
 import path from 'path'
 
@@ -33,7 +33,7 @@ export default async function LookbookPage() {
       */}
       <MinimalNavbar></MinimalNavbar>
       <div className="mx-auto max-w-screen-xl">
-        <Lookbook collections={collections} collectionId={1} />
+        <LookbookArchive collections={collections}/>
       </div>
     </div>
   )

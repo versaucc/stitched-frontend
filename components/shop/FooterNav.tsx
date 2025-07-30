@@ -13,19 +13,17 @@ interface FooterNavProps {
 }
 
 const FooterNav: FC<FooterNavProps> = ({ links }) => (
-  <footer className="py-2">
-    <nav className="flex justify-left space-x-8 uppercase text-xs">
-      {links.map(({ label, href }) => (
-        <Link
-          key={href}
-          href={href}
-          className="transition-opacity duration-200 opacity-60 hover:opacity-100 hover:underline"
-        >
-          {label}
-        </Link>
-      ))}
-    </nav>
-  </footer>
+  <nav className="flex justify-left space-x-8 uppercase text-xs py-2">
+    {links.map(({ label, href }) => (
+      <Link
+        key={href}
+        href={href}
+        className="transition-opacity duration-200 opacity-60 hover:opacity-100 hover:underline"
+      >
+        {label}
+      </Link>
+    ))}
+  </nav>
 )
 
 export default FooterNav
