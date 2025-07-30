@@ -1,0 +1,18 @@
+
+Use decals from react-three/drei
+make sure fred's glb uses smooth UV mapping
+use state management
+
+
+"shuffle" option 
+"reset" options 
+Review order button on last step 
+send to stripe
+
+**Get models for each silhouette** 
+clean in blender 
+how to change texture/color otf? 
+
+Give fred a backdrop? 
+
+Dither? 

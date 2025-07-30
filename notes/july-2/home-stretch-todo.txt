@@ -1,0 +1,67 @@
+Stitched - home stretch: 
+	- Inventory UI 
+		*QR codes
+		*Iphone app (inspo from hyperliquid) 
+		*Auto match panels based on size/design 
+		*Price estimates for embroideries 
+		*"Clock in/out"
+		*Prod stats hourly/weekly/biweekly/monthly
+		*Goals & progress updates / time adjustments 
+		*Sync w google calendar? 
+		*Pair has - number, size, label (img), fabric (img), image (img), 
+			measurements (json), panels (bool, default; false), scrap (bool, default; false), 
+			? QRref ? (address, for API), silhouette (str), collection-id (global const), price, 
+			*** progress : (json, "seam-rip (bool) , panels-matched (bool), embroidered (bool), embroideries (json, location (x6)), sewn (bool), patch (bool), complete (bool) )
+		Needs UI mockup 
+			
+	- Home page 
+		* sizing for nav box
+		* sizing for animation
+		
+	- GLOBAL 
+		* policy footer 
+		* Account icon top align-right
+
+	- Shop page
+		* Add cart sidebar
+		* Filters (make filler product)
+		**** LATER : LINK TO SUPABASE **** Then stripe. 
+		- Product slug 
+			* Description
+			* Picture format ? 
+			* Buttons and smooth routing
+		 
+	- Custom page 
+		* product photo grid (fillers) 
+		* contact button (form)  
+		* redirect to fred
+
+	- Fred 
+		* "Coming soon" 
+
+	- Account page
+		* Need to asses 
+
+	- Misc 
+		* custom 404 page? 
+		* custom loading page? (animation)
+		* supa
+		* stripe
+		* logging data 
+
+Tools needed: R2 bucket, Stripe, Supabase, Vercel??
+
+TODO: 
+	idk just go go go 
+	1. fix svg sizing
+	2. research inventory UI 
+		-New supa table (use notes above)
+	3. 
+M3 brainstorm:
+	- Gas can cover 
+	- Oil spill mat (fill with sawdust)
+	- Wheel covers (zipper for lugs) 
+	- Car cover?
+	- Hood insulation 
+	- Coil covers 
+	
