@@ -2,6 +2,8 @@
 
 import '/styles/shop.css'
 import { useState } from 'react'
+
+import MinimalNavbar from '../../components/navbar/MinimalNavbar'
 import Sidebar from '../../components/shop/Sidebar'
 import CategoryNav from '../../components/shop/CategoryNav'
 import FilterToggle from '../../components/shop/FilterToggle'

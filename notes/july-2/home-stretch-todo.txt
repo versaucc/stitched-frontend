@@ -1,3 +1,40 @@
+TODO: 
+	idk just go go go 
+	1. fix svg sizing
+	2. research inventory UI 
+		-New supa table (use notes above)
+	3. 
+
+
+	REMEMBER DUMMY DATA: 
+		prod dashboard 
+		model sizing
+		lookbook images
+		
+	TODO: 
+		1. Research inventory/prod UI [~1h + ~5h]
+		1.5. Fonts [~0.5h]
+		2. Dial shop page styling [~3h]
+		2.5. Global cart & account icon [1hr]
+		2.75. Page Buffer tuning [1hr]
+		3. complete css styling definitions [2hr]
+		3.5. add mobile styles (research) [~1hr]
+		4. Fix cart sidebar (Headline or subline type?) [~1hr]
+		5. Tie loose ends [~0.5hr]
+		6. Secure endpoints [~1hr]
+		7. Request product photos ?
+		8. Final frontend walkthrough (demo)
+		8.5. Google workspace [~2hr] (w/ team)
+		9. Supabase rewire [2hr]
+		9.25. Search engine optimization [~2-5hr]
+		9.5. Prod UI draft *** (95% milestone) !
+		10. Stripe [~2hr]
+		10.5 Data aggregation methods (explore options) [0.5-2hr]
+		11. Load actual products [1hr]
+		12. DB Security checks and edge-cases [infinite]
+
+	*** DETAILED NOTES BELOW ***
+
 Stitched - home stretch: 
 	- Inventory UI 
 		*QR codes

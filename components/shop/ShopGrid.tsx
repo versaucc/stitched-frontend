@@ -1,12 +1,21 @@
 // components/ShopGrid.tsx
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC } from 'react'
 
 export interface Product {
   id: string
-  name: string
-  price: string   // e.g. '$120'
+  slug: string
+  title: string
+  price: string
   imageUrl: string
+  hoverImageUrl?: string
+  sizes: string[]
+  modelInfo: string
+  description: string
+  images: string[]
+  modelHeight: string
+  modelSize: string
 }
 
 interface ShopGridProps {
@@ -27,13 +36,14 @@ const ShopGrid: FC<ShopGridProps> = ({ title, products }) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
         {products.map((product) => (
-          <div
+          <Link
             key={product.id}
-            className="group relative overflow-hidden rounded-sm"
+            href={`/items/${product.slug}`}
+            className="group block relative overflow-hidden rounded-sm"
           >
             <Image
               src={product.imageUrl}
-              alt={product.name}
+              alt={product.title}
               width={400}
               height={400}
               className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
@@ -48,10 +58,10 @@ const ShopGrid: FC<ShopGridProps> = ({ title, products }) => {
                 transition-opacity duration-300
               "
             >
-              <p className="text-black font-semibold">{product.name}</p>
+              <p className="text-black font-semibold">{product.title}</p>
               <p className="text-black mt-1">{product.price}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

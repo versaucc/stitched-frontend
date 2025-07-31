@@ -51,7 +51,8 @@ export default function Lookbook({ collections }: LookbookProps) {
           lg:w-[80vw] 
           overflow-hidden 
           gap-x-8 
-          h-auto">
+          h-auto
+          z-10">
           {/* Hero image */}
           <section
             className="
@@ -78,13 +79,14 @@ export default function Lookbook({ collections }: LookbookProps) {
               w-[35%]
               flex flex-row overflow-x-auto overflow-y-hidden gap-0
               lg:grid lg:grid-cols-4 lg:overflow-y-auto lg:overflow-x-hidden
-              h-[70vh]
+              h-[70vh] 
             "
           >
             {current.images.map((img, idx) => (
               <div
                 key={idx}
-                className="
+                className=" 
+                thumb-wrapper
                   flex-shrink-0 w-32 h-32
                   lg:aspect-[4/5] lg:relative
                   overflow-hidden

@@ -1,0 +1,106 @@
+/* General page layout */
+.production-page {
+  min-height: 100vh;
+  padding: 1rem; /* p-4 */
+  background-color: #2e272a; /* bg-gray-100 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4; 
+  position: relative;
+}
+
+/* Header styles */
+.production-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem; 
+  margin-bottom: 1rem; /* mb-6 */
+  padding-bottom: 1rem; 
+  position: relative;
+  width: 100%;
+}
+
+.production-header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  color: white;
+  background: #1a1919;;
+  padding: 0.5rem 1rem; /* p-2 */
+  border: 2px solid white;
+  border-radius: 0.375rem; /* rounded-md */
+  z-index: 8;
+}
+
+.production-header nav {
+  position: absolute;
+  right: 2rem; /* Adjust distance from the right edge */
+  display: flex;
+  gap: 1rem; /* space-x-4 */
+  background: #1a1919;;
+  border: solid 2px white;
+  padding: 1rem;
+  z-index: 7;
+}
+
+.production-header nav a {
+  color: #fafafa; /* text-blue-600 */
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+}
+
+.production-header nav a:hover {
+  background: #a20024; /* bg-red-600 */
+  color: black; /* text-white */
+}
+
+/* Grid layout for cards */
+.production-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* grid-cols-1 */
+  width: 80vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-bottom: 1rem; 
+  gap: 1rem; /* gap-4 */
+}
+
+@media (min-width: 768px) {
+  .production-grid {
+    grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+  }
+}
+
+/* Card styles */
+.production-card {
+  background-color: #1a1919; /* bg-white */
+  border-radius: 0.5rem; /* rounded */
+  box-shadow: 0 1px 2px rgba(143, 126, 126, 0.05); /* shadow-sm */
+  padding: 1rem; /* p-4 */
+  z-index: 10;
+}
+
+.production-card h2 {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 0.5rem; /* mb-2 */
+  justify-content: center;
+}
+
+.production-card ul {
+  font-size: 0.875rem; /* text-sm */
+  list-style-type: disc; /* list-disc */
+  padding-left: 1rem; /* list-inside */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.production-card p {
+  font-size: 0.875rem; /* text-sm */
+}
