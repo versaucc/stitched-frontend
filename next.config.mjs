@@ -1,8 +1,7 @@
-// next.config.mjs
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -13,16 +12,24 @@ const nextConfig = {
     appDir: true,
   },
 
-  webpack(config) {
+  webpack(config, { isServer }) {
     // SVGR support for importing .svg as React components
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: { and: [/\.(js|ts)x?$/] },
       use: ['@svgr/webpack'],
-    })
+    });
 
-    return config
+    // Example: Fix for specific server-side or client-side issues
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false, // Prevents issues with 'fs' module on the client side
+      };
+    }
+
+    return config;
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
