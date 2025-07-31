@@ -3,14 +3,20 @@ TODO:
 	1. fix svg sizing
 	2. research inventory UI 
 		-New supa table (use notes above)
+
+
 	3. 
+
+	category (jeans, jorts, shirts)
+	brand 
+	notes
 
 
 	REMEMBER DUMMY DATA: 
 		prod dashboard 
 		model sizing
 		lookbook images
-		
+
 	TODO: 
 		1. Research inventory/prod UI [~1h + ~5h]
 		1.5. Fonts [~0.5h]
