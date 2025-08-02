@@ -1,74 +1,160 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import '../../styles/inventoryform.css';
+import { supabase } from '../../lib/supabase';
 
 const AddNew: React.FC = () => {
+  const [formData, setFormData] = useState({
+    tagId: '',
+    silhouette: '',
+    waist: '',
+    inseam: '',
+    wash: '',
+    brand: '',
+    using: false,
+    donor: false,
+    scrap: false,
+    collection: '',
+    category: '',
+    price: '',
+    finished: false,
+    notes: '',
+    image: '',
+    embroideries: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { error } = await supabase.from('production').insert({
+      tagId: formData.tagId,
+      silhouette: formData.silhouette,
+      waist: formData.waist ? parseInt(formData.waist) : null,
+      inseam: formData.inseam ? parseInt(formData.inseam) : null,
+      wash: formData.wash,
+      brand: formData.brand,
+      using: formData.using,
+      donor: formData.donor,
+      scrap: formData.scrap,
+      collection: formData.collection,
+      category: formData.category,
+      price: formData.price ? parseFloat(formData.price) : null,
+      finished: formData.finished,
+      notes: formData.notes,
+      image: formData.image,
+      embroideries: formData.embroideries, 
+    });
+
+    if (error) {
+      console.error('Error inserting data:', error.message);
+    } else {
+      alert('Data added successfully!');
+      setFormData({
+        tagId: '',
+        silhouette: '',
+        waist: '',
+        inseam: '',
+        wash: '',
+        brand: '',
+        using: false,
+        donor: false,
+        scrap: false,
+        collection: '',
+        category: '',
+        price: '',
+        finished: false,
+        notes: '',
+        image: '',
+        embroideries: '', 
+      });
+    }
+  };
+
   return (
-    <form className="add-new-form">
+    <form className="add-new-form" onSubmit={handleSubmit}>
       <div className="form-group smallest">
-        <label htmlFor="tag-id">*Tag ID*</label>
-        <input type="text" id="tag-id" name="tag-id" required />
+        <label htmlFor="tagId">Tag ID</label>
+        <input type="text" id="tagId" name="tagId" value={formData.tagId} onChange={handleChange} required />
+      </div>
+      <div className="form-group medium">
+        <label htmlFor="silhouette">Silhouette</label>
+        <input type="text" id="silhouette" name="silhouette" value={formData.silhouette} onChange={handleChange} />
+      </div>
+      <div className="form-group small">
+        <label htmlFor="waist">Waist</label>
+        <input type="number" id="waist" name="waist" value={formData.waist} onChange={handleChange} />
+      </div>
+      <div className="form-group small">
+        <label htmlFor="inseam">Inseam</label>
+        <input type="number" id="inseam" name="inseam" value={formData.inseam} onChange={handleChange} />
       </div>
       <div className="form-group small">
         <label htmlFor="wash">Wash</label>
-        <input type="text" id="wash" name="wash" />
+        <input type="text" id="wash" name="wash" value={formData.wash} onChange={handleChange} />
       </div>
-      <div className="form-group smallest">
-        <label htmlFor="size">Size</label>
-        <input type="number" id="size" name="size" />
-      </div>
-        <div className="form-group small">
+      <div className="form-group small">
         <label htmlFor="brand">Brand</label>
-        <input type="text" id="brand" name="brand" />
+        <input type="text" id="brand" name="brand" value={formData.brand} onChange={handleChange} />
+      </div>
+      <div className="form-group small">
+        <label htmlFor="using">Using</label>
+        <select id="using" name="using" value={formData.using.toString()} onChange={handleChange}>
+          <option value="false">False</option>
+          <option value="true">True</option>
+        </select>
+      </div>
+      <div className="form-group small">
+        <label htmlFor="donor">Donor</label>
+        <select id="donor" name="donor" value={formData.donor.toString()} onChange={handleChange}>
+          <option value="false">False</option>
+          <option value="true">True</option>
+        </select>
+      </div>
+      <div className="form-group small">
+        <label htmlFor="scrap">Scrap</label>
+        <select id="scrap" name="scrap" value={formData.scrap.toString()} onChange={handleChange}>
+          <option value="false">False</option>
+          <option value="true">True</option>
+        </select>
       </div>
         <div className="form-group medium">
-        <label htmlFor="silhouette">Silhouette</label>
-        <input type="text" id="silhouette" name="silhouette" />
+        <label htmlFor="embroideries">Embroideries</label>
+        <textarea id="embroideries" name="embroideries" value={formData.embroideries} onChange={handleChange} />
       </div>
       <div className="form-group small">
-        <label htmlFor="for-panels">For Panels</label>
-        <select id="for-panels" name="for-panels" defaultValue="false">
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
-      </div>
-      <div className="form-group small">
-        <label htmlFor="for-scrap">For Scrap</label>
-        <select id="for-scrap" name="for-scrap" defaultValue="false">
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
-      </div>
-      <div className="form-group smallest">
-        <label htmlFor="collection-id">Collection</label>
-        <input type="text" id="collection-id" name="collection-id" />
-      </div>
-      <div className="form-group smallest">
-        <label htmlFor="price">Price</label>
-        <input type="number" id="price" name="price" step="0.01" />
-      </div>
-      <div className="form-group small">
-        <label htmlFor="finished">Finished</label>
-        <select id="finished" name="finished" defaultValue="false">
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
+        <label htmlFor="collection">Collection</label>
+        <input type="text" id="collection" name="collection" value={formData.collection} onChange={handleChange} />
       </div>
       <div className="form-group small">
         <label htmlFor="category">Category</label>
-        <select id="category" name="category" defaultValue="pants">
-          <option value="jeans">Jeans</option>
-          <option value="jorts">Jorts</option>
-          <option value="shirts">Shirts</option>
-          <option value="pants">Pants</option>
+        <input type="text" id="category" name="category" value={formData.category} onChange={handleChange} />
+      </div>
+      <div className="form-group small">
+        <label htmlFor="price">Price</label>
+        <input type="number" id="price" name="price" value={formData.price} onChange={handleChange} />
+      </div>
+      <div className="form-group small">
+        <label htmlFor="finished">Finished</label>
+        <select id="finished" name="finished" value={formData.finished.toString()} onChange={handleChange}>
+          <option value="false">False</option>
+          <option value="true">True</option>
         </select>
       </div>
       <div className="form-group medium">
         <label htmlFor="notes">Notes</label>
-        <textarea id="notes" name="notes" rows={3} style={{ resize: 'none', overflow: 'hidden' }} />
+        <textarea id="notes" name="notes" value={formData.notes} onChange={handleChange} />
       </div>
-        <div className="form-group small">
+      <div className="form-group medium">
         <label htmlFor="image">Image</label>
-        <input type="file" id="image" name="image" accept="image/*" />
+        <input type="text" id="image" name="image" value={formData.image} onChange={handleChange} />
       </div>
       <button type="submit" className="submit-button">Add New</button>
     </form>

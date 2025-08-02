@@ -1,0 +1,68 @@
+
+8/2/2025 TODO: 
+    - Site improvements/security 
+    - Owen intake revisions. **
+    - Arm rest stabilizers 
+    - Bimmers all fucked. 
+
+
+SECONDARY TODO: 
+    -
+
+SITE IS LIVE -> PRIORITY TODO 
+	- ISOLATE unauth to homepage ?anywhere but ./ ./lookbook should be locked (back button)
+	- SECURE admin dashboard
+	- ADD row level security policies
+	- CREATE account and bag icons
+	- REDIRECT other shopify urls 
+	- TEST & ITERATE on inventory (prod, hot, sold) all with suptables for categories
+
+-------------------------------------------------------------------------------------
+	TODO: 
+		1. Research inventory/prod UI [~1h + ~5h]
+		1.5. Fonts [~0.5h] Noah and Sam
+		2. Dial shop page styling [~3h] 
+		2.5. Global cart & account icon [1hr]
+		2.75. Page Buffer tuning [1hr] 
+		3. complete css styling definitions [2hr]
+		3.5. add mobile styles (research) [~1hr]
+		4. Fix cart sidebar (Headline or subline type?) [~1hr]
+		5. Tie loose ends [~0.5hr]
+		6. Secure endpoints [~1hr]
+		7. Request product photos ?
+		8. Final frontend walkthrough (demo)
+		8.5. Google workspace [~2hr] (w/ group)
+		9. Supabase rewire [2hr]
+		9.25. Search engine optimization [~2-5hr]
+		9.5. Prod UI draft *** (95% milestone) !
+		10. Stripe [~2hr]
+		10.5 Data aggregation methods (explore options) [0.5-2hr]
+		11. Load actual products [1hr]
+		12. DB Security checks and edge-cases [infinite]
+
+
+-------------------------------------------------------------------------------------
+	MINOR ISSUES / REQUESTS
+		- Create a new production/edit checklist 
+		- Make sure all fields are nescessary
+		- Link items to stock ct 
+		- Clock in/out button 
+		- Pairs per day average 
+		- Goals (clock)
+		- include two tone in the charts 
+		- Sales dashboard 
+		- Web traffic dashboard -> upload somewhere for SEO optimization
+		- More analytics 
+		- Costs dashboard 
+		- Python? 
+		- Really start to track spending 
+		- Create your own meta pixel 
+		- Think about a ./docs page 
+		- R2 bucket 
+		- Calendar sync for dashboard 
+		- * GET PRICING ESTIMATE *
+		- REMEMBER DUMMY DATA: 
+		- prod dashboard 
+		- model sizing
+		- lookbook images
+-------------------------------------------------------------------------------------

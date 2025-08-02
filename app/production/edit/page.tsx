@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import '../../../styles/admin.css';
 import AddNew from '../../../components/admin/AddNew';
+import EditExisting from '../../../components/admin/EditExisting';
 
 export default function ProductionEdit() {
   const [activeComponent, setActiveComponent] = useState<'add' | 'edit'>('add');
@@ -27,7 +28,7 @@ export default function ProductionEdit() {
         </button>
       </div>
       <div className="component-container">
-        {activeComponent === 'add' ? <AddNew /> : <p>Edit Existing Component Coming Soon</p>}
+        {activeComponent === 'add' ? <AddNew /> : <EditExisting/>}
       </div>
       <style jsx>{`
         .toggle-switch {
