@@ -26,12 +26,8 @@ export default function HomePage() {
 
         {/* menu directly under input */}
         <nav className="homepage-menu">
-          <a href="./shop">Shop</a>
           <a href="./lookbook">Lookbook</a>
-          <a href="./shop/custom">Custom Denim</a>
-          <a href="./">Locations</a>
           <a href="./account">Account</a>
-          <a href="./">Contact</a>
         </nav>
       </main>
     </div>

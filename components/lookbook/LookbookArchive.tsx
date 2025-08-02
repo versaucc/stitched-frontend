@@ -104,20 +104,6 @@ export default function LookbookArchive({ collections }: LookbookProps) {
             ))}
           </nav>
         </div>
-
-        {/* FooterNav */}
-        <div className='footer'>
-          <FooterNav
-            links={[
-              { label: 'shop', href: '/shop' },
-              { label: 'custom', href: '/shop/custom' },
-              { label: 'lookbook', href: '/lookbook' },
-              { label: 'contact', href: '/contact' },
-              { label: 'locations', href: '/locations' },
-              { label: 'jobs', href: '/jobs' },
-            ]}
-          />
-        </div>
       </div>
     </div>
   )
