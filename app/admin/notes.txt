@@ -1,5 +1,0 @@
-
-
-Fix admin page. Supabase auth? 
-Set up webhook for square -> supa
-set up webhook website -> supa
