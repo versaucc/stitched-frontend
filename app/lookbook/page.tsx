@@ -26,13 +26,13 @@ export default async function LookbookPage() {
 
   return (
     // full‐screen wrapper, centers content horizontally, hides scrollbars
-    <div className="h-screen w-screen flex justify-center overflow-hidden bg-black">
+    <div>
       {/* 
         offset 25vh from top, take up remaining 75vh,
         cap width to screen-xl so it never stretches too wide 
       */}
       <MinimalNavbar></MinimalNavbar>
-      <div className="mx-auto max-w-screen-xl">
+      <div>
         <Lookbook collections={collections} collectionId={1} />
       </div>
     </div>

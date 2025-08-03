@@ -24,10 +24,34 @@
   width: 100%;
 }
 
+/* Row below the header for nav and clock */
+.header-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem; /* Space between nav and clock */
+  margin-top: 1rem;
+  width: 100%;
+}
+
+
 .production-header h1 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  color: white;
+  background: #1a1919;
+  padding: 0.5rem 1rem; /* p-2 */
+  border: 2px solid white;
+  border-radius: 0.375rem; /* rounded-md */
+  z-index: 8;
+  text-align: center;
+}
+
+.production-header h2 {
   position: absolute;
-  left: 10%;
-  transform: translateX(-10%);
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 1.875rem; /* text-3xl */
   font-weight: 700; /* font-bold */
   color: white;
@@ -38,14 +62,14 @@
   z-index: 8;
 }
 
+/* Navigation bar styles */
 .production-header nav {
-  position: absolute;
   display: flex;
   gap: 1rem; /* space-x-4 */
-  background: #1a1919;;
-  border: solid 2px white;
+  background: #1a1919;
+  border: solid 1px white;
   padding: 1rem;
-  z-index: 7;
+  border-radius: 0.375rem; /* rounded-md */
 }
 
 .production-header nav a {
@@ -106,16 +130,13 @@
 
 /* Clock styles */
 .clock {
-  position: absolute; 
-  left: 80%;
-  transform: translateX(-80%);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
   background: #1a1919;
   padding: 1rem;
-  border: 2px solid white;
+  border: 1px solid white;
   border-radius: 0.375rem;
 }
 
@@ -135,4 +156,77 @@
 
 .clock-button:hover {
   background: #a20024;
+}
+
+/* Small and extra-small screen styles */
+@media (max-width: 640px) {
+  /* General page layout */
+  .production-page {
+    padding: 0.5rem; /* Reduce padding */
+    gap: 1rem; /* Reduce gap */
+  }
+
+  /* Header styles */
+  .production-header {
+    margin-top: 1vh; /* Reduce top margin */
+    margin-bottom: 0.5rem; /* Reduce bottom margin */
+    padding-bottom: 2rem; /* Reduce padding */
+  }
+
+  /* Row below the header for nav and clock */
+  .header-row {
+    flex-direction: column; /* Stack navbar and clock vertically */
+    gap: 0.5rem; /* Reduce gap */
+    align-items: stretch; /* Ensure full width */
+  }
+
+  /* Navbar styles */
+  .production-header nav {
+    flex-wrap: wrap; /* Allow wrapping to avoid overflow */
+    gap: 0.5rem; /* Reduce gap between links */
+    padding: 0.5rem; /* Reduce padding */
+  }
+
+  .production-header nav a {
+    font-size: 0.75rem; /* Reduce font size */
+    padding: 0.25rem 0.5rem; /* Reduce padding */
+  }
+
+  /* Clock styles */
+  .clock {
+    padding: 0.5rem; /* Reduce padding */
+    gap: 0.25rem; /* Reduce gap */
+  }
+
+  .clock-button {
+    font-size: 0.875rem; /* Reduce font size */
+    padding: 0.25rem 0.5rem; /* Reduce padding */
+  }
+
+  /* Grid layout for cards */
+  .production-grid {
+    grid-template-columns: 1fr; /* Single column layout */
+    width: 100%; /* Full width */
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0; /* Remove right margin */
+    gap: 0.5rem; /* Reduce gap */
+  }
+
+  /* Card styles */
+  .production-card {
+    padding: 0.5rem; /* Reduce padding */
+  }
+
+  .production-card h2 {
+    font-size: 1rem; /* Reduce font size */
+  }
+
+  .production-card ul {
+    font-size: 0.75rem; /* Reduce font size */
+    padding-left: 0.5rem; /* Reduce padding */
+  }
+
+  .production-card p {
+    font-size: 0.75rem; /* Reduce font size */
+  }
 }

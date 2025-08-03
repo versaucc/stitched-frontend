@@ -7,6 +7,7 @@ import { Card, CardContent } from '../../components/ui/card';
 import InventorySummary from '../../components/admin/InventorySummary';
 import AuthWrapper from '../../lib/authWrapper';
 import Clock from '../../components/admin/Clock';
+import SiteViewers from '../../components/admin/SiteViewers'; // Import SiteViewers component
 
 export default function ProductionHome() {
   return (
@@ -14,18 +15,18 @@ export default function ProductionHome() {
       <div className="production-page">
         <VectorAnimation />
         <header className="production-header">
-          <div className="header-left">
-          </div>
           <h1>Dashboard</h1>
-          <nav>
-            <Link href="/admin/edit">Edit</Link>
-            <Link href="/admin/view">View</Link>
-            <Link href="/admin/data">Data</Link>
-            <Link href="/admin/data/sales">Sales Data</Link>
-            <Link href="/admin/data/customers">Customer Data</Link>
-            <Link href="/admin/data/website">Website Data</Link>
-          </nav>
-          <Clock />
+          <div className="header-row">
+            <nav>
+              <Link href="/admin/edit">Edit</Link>
+              <Link href="/admin/view">View</Link>
+              <Link href="/admin/data">Data</Link>
+              <Link href="/admin/data/sales">Sales Data</Link>
+              <Link href="/admin/data/customers">Customer Data</Link>
+              <Link href="/admin/data/website">Website Data</Link>
+            </nav>
+            <Clock />
+          </div>
         </header>
 
         <div className="production-grid">
@@ -48,6 +49,13 @@ export default function ProductionHome() {
               <p>Monthly Output: 123 pairs</p>
             </CardContent>
           </Card>
+
+          <Card className="production-card">
+            <CardContent>
+              <SiteViewers /> {/* Add SiteViewers component */}
+            </CardContent>
+          </Card>
+
           <Card className="production-card">
             <CardContent>
               <InventorySummary
@@ -63,6 +71,7 @@ export default function ProductionHome() {
               />
             </CardContent>
           </Card>
+
           <Card className="production-card">
             <CardContent>
               <InventorySummary

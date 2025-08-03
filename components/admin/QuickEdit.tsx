@@ -62,18 +62,18 @@ const QuickEdit: React.FC = () => {
       {formData && (
         <form className="quick-edit-form" onSubmit={handleSubmit}>
           <div className="checkbox-grid">
-            {Object.entries(formData).map(([key, value]) => (
-              <div key={key} className="form-group">
-                <label htmlFor={key}>{key.replace(/_/g, ' ')}</label>
-                <input
-                  type="checkbox"
-                  id={key}
-                  name={key}
-                  checked={value}
-                  onChange={(e) => handleCheckboxChange(key, e.target.checked)}
-                />
-              </div>
-            ))}
+          {Object.entries(formData).map(([key, value]) => (
+            <div key={key} className="form-group">
+              <label htmlFor={key}>{key.replace(/_/g, ' ')}</label>
+              <input
+                type="checkbox"
+                id={key}
+                name={key}
+                checked={typeof value === 'boolean' ? value : false} // Ensure value is a boolean
+                onChange={(e) => handleCheckboxChange(key, e.target.checked)}
+              />
+            </div>
+          ))}
           </div>
           <button type="submit" className="submit-button">Update</button>
           {submitResult && (
