@@ -15,10 +15,10 @@ SECONDARY TODO:
     -
 
 SITE IS LIVE -> PRIORITY TODO 
-	- ISOLATE unauth to homepage ?anywhere but ./ ./lookbook should be locked (back button)
-	- SECURE admin dashboard
-	- ADD row level security policies
-	- CREATE account and bag icons
+	- ISOLATE unauth to homepage ?anywhere but ./ ./lookbook should be locked (back button) DONE
+	- SECURE admin dashboard DONE 
+	- ADD row level security policies 
+	- CREATE account and bag icons 
 	- REDIRECT other shopify urls 
 	- TEST & ITERATE on inventory (prod, hot, sold) all with suptables for categories
 

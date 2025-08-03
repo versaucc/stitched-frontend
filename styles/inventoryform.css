@@ -213,3 +213,76 @@
   background: #a20024;
   color: white;
 }
+
+/* Small and extra-small screen styles for edit page */
+@media (max-width: 640px) {
+  /* General page layout */
+  .production-page {
+    padding: 0.5rem; /* Reduce padding */
+    gap: 1rem; /* Reduce gap */
+  }
+
+  /* Header styles */
+  .production-header {
+    margin-top: 1vh; /* Reduce top margin */
+    margin-bottom: 0.5rem; /* Reduce bottom margin */
+    padding-bottom: 2rem; /* Reduce padding */
+  }
+
+  /* Toggle switch styles */
+  .toggle-switch {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 0.5rem; /* Reduce gap between buttons */
+    align-items: stretch; /* Ensure full width */
+    margin: 1rem 0; /* Adjust margin */
+  }
+
+  .toggle-button {
+    font-size: 0.875rem; /* Reduce font size */
+    padding: 0.5rem; /* Reduce padding */
+    width: 100%; /* Full width for buttons */
+  }
+
+  .toggle-button.active {
+    background: #a20024; /* Keep active button styling */
+    color: white;
+  }
+
+  /* Component container styles */
+  .component-container {
+    flex-direction: column; /* Stack components vertically */
+    gap: 1rem; /* Reduce gap */
+    width: 100%; /* Full width */
+    padding: 0.5rem; /* Reduce padding */
+  }
+
+  /* AddNew, EditExisting, and QuickEdit components */
+  .add-new-form,
+  .edit-existing,
+  .quick-edit {
+    padding: 1rem; /* Reduce padding */
+    gap: 0.5rem; /* Reduce gap */
+    width: 100%; /* Full width */
+  }
+
+  .form-group {
+    flex-direction: column; /* Stack labels and inputs vertically */
+    gap: 0.25rem; /* Reduce gap */
+  }
+
+  .form-group input {
+    font-size: 0.875rem; /* Reduce font size */
+    padding: 0.5rem; /* Reduce padding */
+  }
+
+  .submit-button {
+    font-size: 0.875rem; /* Reduce font size */
+    padding: 0.5rem; /* Reduce padding */
+    width: 100%; /* Full width for button */
+  }
+
+  .submit-result {
+    font-size: 0.75rem; /* Reduce font size */
+    padding: 0.5rem; /* Reduce padding */
+  }
+}

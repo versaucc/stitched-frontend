@@ -5,11 +5,13 @@ import '../../../styles/admin.css';
 import AddNew from '../../../components/admin/AddNew';
 import EditExisting from '../../../components/admin/EditExisting';
 import QuickEdit from '../../../components/admin/QuickEdit';
+import AuthWrapper from '../../../lib/authWrapper';
 
 export default function ProductionEdit() {
   const [activeComponent, setActiveComponent] = useState<'add' | 'edit' | 'quick'>('add');
 
   return (
+    <AuthWrapper>
     <div className="production-page">
       <header className="production-header">
         <h2>Inventory Manager</h2>
@@ -65,5 +67,6 @@ export default function ProductionEdit() {
         }
       `}</style>
     </div>
+    </AuthWrapper>
   );
 }
