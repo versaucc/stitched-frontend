@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 import '../../../styles/admin.css';
 import AddNew from '../../../components/admin/AddNew';
 import EditExisting from '../../../components/admin/EditExisting';
+import QuickEdit from '../../../components/admin/QuickEdit';
 
 export default function ProductionEdit() {
-  const [activeComponent, setActiveComponent] = useState<'add' | 'edit'>('add');
+  const [activeComponent, setActiveComponent] = useState<'add' | 'edit' | 'quick'>('add');
 
   return (
     <div className="production-page">
@@ -26,9 +27,17 @@ export default function ProductionEdit() {
         >
           Edit Existing
         </button>
+        <button
+          className={`toggle-button ${activeComponent === 'quick' ? 'active' : ''}`}
+          onClick={() => setActiveComponent('quick')}
+        >
+          Quick Edit
+        </button>
       </div>
       <div className="component-container">
-        {activeComponent === 'add' ? <AddNew /> : <EditExisting/>}
+        {activeComponent === 'add' && <AddNew />}
+        {activeComponent === 'edit' && <EditExisting />}
+        {activeComponent === 'quick' && <QuickEdit />}
       </div>
       <style jsx>{`
         .toggle-switch {

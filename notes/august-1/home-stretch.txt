@@ -5,6 +5,9 @@
     - Arm rest stabilizers 
     - Bimmers all fucked. 
 
+Admin page plan: 
+    Sneaky route for us. 
+
 
 SECONDARY TODO: 
     -

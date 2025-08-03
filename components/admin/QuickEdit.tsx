@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import '../../styles/inventoryform.css';
 import { supabase } from '../../lib/supabase';
 
-const EditExisting: React.FC = () => {
+const QuickEdit: React.FC = () => {
   const [searchTag, setSearchTag] = useState('');
   const [formData, setFormData] = useState<any>(null);
   const [submitResult, setSubmitResult] = useState<{ message: string; isError: boolean } | null>(null);
@@ -12,7 +12,7 @@ const EditExisting: React.FC = () => {
   const handleSearch = async () => {
     const { data, error } = await supabase
       .from('production')
-      .select('*')
+      .select('has_panels, seam_ripped, embroidered, sewn, patch, done')
       .eq('tagId', searchTag)
       .single();
 
@@ -20,25 +20,20 @@ const EditExisting: React.FC = () => {
       console.error('Error fetching data:', error.message);
       alert('No pair found with the provided Tag ID.');
     } else {
-      // Clean 'created_at' field before setting formData
-      if (data?.created_at) {
-        data.created_at = formatDate(data.created_at);
-      }
       setFormData(data);
     }
   };
 
-  const handleFieldChange = (field: string, value: any) => {
-    setFormData((prev: any) => ({ ...prev, [field]: value }));
+  const handleCheckboxChange = (field: string, checked: boolean) => {
+    setFormData((prev: any) => ({ ...prev, [field]: checked }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { id, ...updatedData } = formData; // Exclude 'id' field from the update
     const { error } = await supabase
       .from('production')
-      .update(updatedData)
-      .eq('tagId', formData.tagId);
+      .update(formData)
+      .eq('tagId', searchTag);
 
     if (error) {
       setSubmitResult({ message: `Error: ${error.message}`, isError: true });
@@ -48,20 +43,8 @@ const EditExisting: React.FC = () => {
     }
   };
 
-  const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-    };
-    return new Intl.DateTimeFormat('en-US', options).format(date).replace(',', '');
-  };
-
   return (
-    <div className="edit-existing">
+    <div className="quick-edit">
       <header className="sticky-header">
         <div className="search-bar">
           <input
@@ -77,22 +60,22 @@ const EditExisting: React.FC = () => {
       </header>
 
       {formData && (
-        <form className="add-new-form grid-form" onSubmit={handleSubmit}>
-          {Object.entries(formData).map(([key, value]) => (
-            key !== 'id' && ( // Ignore 'id' field
+        <form className="quick-edit-form" onSubmit={handleSubmit}>
+          <div className="checkbox-grid">
+            {Object.entries(formData).map(([key, value]) => (
               <div key={key} className="form-group">
                 <label htmlFor={key}>{key.replace(/_/g, ' ')}</label>
                 <input
-                  type="text"
+                  type="checkbox"
                   id={key}
                   name={key}
-                  value={value ?? ''} // Use an empty string if value is null or undefined
-                  onChange={(e) => handleFieldChange(key, e.target.value)}
+                  checked={value}
+                  onChange={(e) => handleCheckboxChange(key, e.target.checked)}
                 />
               </div>
-            )
-          ))}
-          <button type="submit" className="submit-button">Submit Changes</button>
+            ))}
+          </div>
+          <button type="submit" className="submit-button">Update</button>
           {submitResult && (
             <p
               className={`submit-result ${
@@ -108,4 +91,4 @@ const EditExisting: React.FC = () => {
   );
 };
 
-export default EditExisting;
+export default QuickEdit;

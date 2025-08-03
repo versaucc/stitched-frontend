@@ -1,75 +1,72 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { supabase } from '../../../lib/supabase'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from '../../../lib/supabase';
 
 export default function LoginPage() {
-  const router = useRouter()
-  const [redirect, setRedirect]  = useState('/home')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const router = useRouter();
+  const [redirect, setRedirect] = useState('/account'); // Default redirect path
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const redirectParam = params.get('redirect') || '/shop';
+    const redirectParam = params.get('redirect') || '/account'; // Default to /account if no redirect parameter is provided
     setRedirect(redirectParam);
   }, []);
 
-const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setError('')
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
 
-  const { data: authData, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  })
+    const { data: authData, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-  if (error || !authData.user) {
-    setError(error?.message || 'Login failed')
-    return
-  }
+    if (error || !authData.user) {
+      setError(error?.message || 'Login failed');
+      return;
+    }
 
+    const user = authData.user;
 
-  const user = authData.user
-
-  // Fetch existing login info
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('logins, login_timestamps, ips_associated')
-    .eq('id', user.id)
-    .single()
-
-  const now = new Date().toISOString()
-  const ip = await fetch('https://api.ipify.org?format=json')
-    .then(res => res.json())
-    .then(data => data.ip)
-    .catch(() => 'unknown')
-
-  if (profile) {
-    const updatedTimestamps = Array.isArray(profile.login_timestamps)
-      ? [...profile.login_timestamps, now]
-      : [now]
-
-    const updatedIPs = Array.isArray(profile.ips_associated)
-      ? [...new Set([...profile.ips_associated, ip])]
-      : [ip]
-
-    await supabase
+    // Fetch existing login info
+    const { data: profile } = await supabase
       .from('profiles')
-      .update({
-        logins: (profile.logins || 0) + 1,
-        login_timestamps: updatedTimestamps,
-        ips_associated: updatedIPs,
-      })
+      .select('logins, login_timestamps, ips_associated')
       .eq('id', user.id)
-  }
+      .single();
 
-  router.push(redirect)
-}
+    const now = new Date().toISOString();
+    const ip = await fetch('https://api.ipify.org?format=json')
+      .then((res) => res.json())
+      .then((data) => data.ip)
+      .catch(() => 'unknown');
 
+    if (profile) {
+      const updatedTimestamps = Array.isArray(profile.login_timestamps)
+        ? [...profile.login_timestamps, now]
+        : [now];
 
+      const updatedIPs = Array.isArray(profile.ips_associated)
+        ? [...new Set([...profile.ips_associated, ip])]
+        : [ip];
+
+      await supabase
+        .from('profiles')
+        .update({
+          logins: (profile.logins || 0) + 1,
+          login_timestamps: updatedTimestamps,
+          ips_associated: updatedIPs,
+        })
+        .eq('id', user.id);
+    }
+
+    router.push(redirect); // Redirect to the specified or default path
+  };
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4">
@@ -96,6 +93,14 @@ const handleLogin = async (e: React.FormEvent) => {
           Sign In
         </button>
       </form>
+      <div className="mt-4">
+        <a
+          href="/account/register"
+          className="text-white underline hover:text-gray-300"
+        >
+          Create Account
+        </a>
+      </div>
     </div>
-  )
+  );
 }
