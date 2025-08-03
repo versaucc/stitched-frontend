@@ -47,6 +47,20 @@
   transition: border-color 0.2s;
   outline: none;
 }
+.homepage-input-arrow {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #fff; /* Adjust color as needed */
+}
+
+.homepage-input-arrow:hover {
+  color: #a20024; /* Change color on hover */
+}
 
 .homepage-input:hover {
     border: 1px solid #a20024;
@@ -61,8 +75,8 @@
   background: #000;
   border: 1px solid rgba(255, 255, 255, 0.81);
   color: #fff;
-  height: 40vh;
-  min-height: 14rem; 
+  height: 10vh;
+  min-height: 10rem; 
   width: 15vw;
   min-width: 16rem; 
   display: flex;

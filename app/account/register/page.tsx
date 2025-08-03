@@ -12,7 +12,7 @@ export default function RegisterPage() {
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const [redirect, setRedirect] = useState('/home');
+  const [redirect, setRedirect] = useState('/');
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
