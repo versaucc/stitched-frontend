@@ -5,6 +5,11 @@
     - Arm rest stabilizers 
     - Bimmers all fucked. 
 
+Need branch maintenance to be have secure admin page. 
+Need branch main to i forgot  
+
+Focus on admin page
+
 
 SECONDARY TODO: 
     -
