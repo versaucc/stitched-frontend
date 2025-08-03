@@ -8,14 +8,21 @@ const SiteViewers: React.FC = () => {
 
   useEffect(() => {
     const fetchViewerCount = async () => {
-      const { data, error } = await supabase
-        .from('page_views')
-        .select('ip_address', { count: 'exact', distinct: true });
+      try {
+        const { data, error } = await supabase
+          .from('page_views')
+          .select('ip_address'); // Select IP addresses
 
-      if (error) {
-        console.error('Error fetching viewer count:', error.message);
-      } else {
-        setViewerCount(data.length);
+        if (error) {
+          console.error('Error fetching viewer count:', error.message);
+          return;
+        }
+
+        // Get unique IPs using a Set
+        const uniqueIPs = new Set(data.map((item) => item.ip_address));
+        setViewerCount(uniqueIPs.size); // Count unique IPs
+      } catch (err) {
+        console.error('Unexpected error fetching viewer count:', err);
       }
     };
 
