@@ -1,65 +1,79 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { supabase } from '../../../lib/supabase'
-
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from '../../../lib/supabase';
 
 export default function RegisterPage() {
-  const router = useRouter()
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [phone, setPhone] = useState('')
- 
-  const [error, setError] = useState('')
-  const [message, setMessage] = useState('')
-
-  const [redirect, setRedirect] = useState('/home')
+  const router = useRouter();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [redirect, setRedirect] = useState('/home');
 
   const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setMessage('')
-    
-    await supabase.from('profiles').insert([
-      {
-        name,
-        phone,
-        email: email, 
-      },
-    ])
+    e.preventDefault();
+    setError('');
+    setMessage('');
 
-    const { data, error } = await supabase.auth.signUp({
+    // Step 1: Create the user through Supabase
+    const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
-    })
+    });
 
-    if (error) {
-      setError(error.message)
-    } else {
-
-      // store extra profile info in a separate table
-      const { data: { user } } = await supabase.auth.getUser()
-
-      setMessage('Check your email to verify your account.')
-
-      if(redirect) {
-          await new Promise(resolve => setTimeout(resolve, 3000)) // 1 second delay
-          router.push(redirect)
-      } 
+    if (authError) {
+      setError(authError.message);
+      return;
     }
-  }
-    useEffect(() => {
-    const param = new URLSearchParams(window.location.search).get('redirect')
-    setRedirect(param || '/home')
-  }, [])
+
+    const user = authData.user;
+
+    if (!user) {
+      setError('Failed to retrieve user information.');
+      return;
+    }
+
+    // Step 2: Send a verification link
+    const verificationLink = 'https://stitchedpdx.com/verify'; // Replace with your verification link
+    setMessage(`Check your email to verify your account.`);
+
+    // Step 3: Save user data to the 'profiles' table
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .insert([
+        {
+          UID: user.id, // Save user ID as UID
+          name,
+          email,
+          phone,
+        },
+      ]);
+
+    if (profileError) {
+      setError(profileError.message);
+      return;
+    }
+
+    if (redirect) {
+      await new Promise((resolve) => setTimeout(resolve, 3000)); // 3-second delay
+      router.push(redirect);
+    }
+  };
+
+  useEffect(() => {
+    const param = new URLSearchParams(window.location.search).get('redirect');
+    setRedirect(param || '/home');
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4">
       <h1 className="text-3xl font-bold mb-6">Sign Up</h1>
       <form onSubmit={handleRegister} className="w-full max-w-sm space-y-4">
-      <input
+        <input
           type="name"
           placeholder="Name"
           value={name}
@@ -99,5 +113,5 @@ export default function RegisterPage() {
         </button>
       </form>
     </div>
-  )
+  );
 }

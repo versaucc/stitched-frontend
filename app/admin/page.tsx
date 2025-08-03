@@ -1,98 +1,94 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import '../../styles/admin.css';
+import VectorAnimation from '../../components/backgrounds/VectorAnimation';
+import Link from 'next/link';
+import { Card, CardContent } from '../../components/ui/card';
+import InventorySummary from '../../components/admin/InventorySummary';
+import AuthWrapper from '../../lib/authWrapper';
+import Clock from '../../components/admin/Clock';
 
-export default function AdminPage() {
-  const [loading, setLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordValidated, setPasswordValidated] = useState(false);
-  const [user, setUser] = useState<any>(null);
-
-  const supabase = createClientComponentClient();
-  const router = useRouter();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
-
-      if (error || !user) {
-        setError("User not logged in.");
-        setLoading(false);
-        return;
-      }
-
-      setUser(user);
-    };
-
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    if (!user) return;
-
-    const checkAdminStatus = async () => {
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("is_admin")
-        .eq("UID", user.id)
-        .single();
-
-      if (profileError || !profile?.is_admin) {
-        setError("You do not have admin privileges.");
-        setLoading(false);
-        return;
-      }
-
-      setIsAdmin(true);
-      setLoading(false);
-    };
-
-    checkAdminStatus();
-  }, [user]);
-
-  const handlePasswordSubmit = () => {
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-      setPasswordValidated(true);
-    } else {
-      setError("Incorrect admin password.");
-    }
-  };
-
-  if (loading) return <p className="text-white">Checking access...</p>;
-
-  if (!isAdmin || !passwordValidated)
-    return (
-      <div className="flex flex-col items-center justify-center h-screen bg-black text-white">
-        <h1 className="text-2xl mb-4">Admin Access</h1>
-        <input
-          type="password"
-          className="p-2 bg-gray-800 text-white border border-gray-600 rounded"
-          placeholder="Enter Admin Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          onClick={handlePasswordSubmit}
-          className="mt-4 px-4 py-2 bg-white text-black rounded hover:bg-gray-200"
-        >
-          Submit
-        </button>
-        {error && <p className="mt-2 text-red-500">{error}</p>}
-      </div>
-    );
-
+export default function ProductionHome() {
   return (
-    <div className="p-10 bg-black text-white min-h-screen">
-      <h1 className="text-4xl mb-6">Welcome, Admin</h1>
-      <p>You now have access to admin tools.</p>
-      {/* Add more admin features here */}
-    </div>
+    <AuthWrapper>
+      <div className="production-page">
+        <VectorAnimation />
+        <header className="production-header">
+          <div className="header-left">
+          </div>
+          <h1>Dashboard</h1>
+          <nav>
+            <Link href="/admin/edit">Edit</Link>
+            <Link href="/admin/view">View</Link>
+            <Link href="/admin/data">Data</Link>
+            <Link href="/admin/data/sales">Sales Data</Link>
+            <Link href="/admin/data/customers">Customer Data</Link>
+            <Link href="/admin/data/website">Website Data</Link>
+          </nav>
+          <Clock />
+        </header>
+
+        <div className="production-grid">
+          <Card className="production-card">
+            <CardContent>
+              <h2 className="text-center">Recent</h2>
+              <ul>
+                <li>07/18/2025 - Something something different got done</li>
+                <li>07/15/2025 - Something something else got done</li>
+                <li>07/10/2025 - Something something got done</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="production-card">
+            <CardContent>
+              <h2 className="text-center">Production Stats</h2>
+              <p>Weekly: 32 pairs completed</p>
+              <p>Biweekly Goal: 75 pairs</p>
+              <p>Monthly Output: 123 pairs</p>
+            </CardContent>
+          </Card>
+          <Card className="production-card">
+            <CardContent>
+              <InventorySummary
+                tableName="Inventory - Jeans"
+                rowNames={['Light Wash', 'Medium Wash', 'Dark Wash', 'Two-Tone']}
+                columnNames={['26', '28', '30', '32', '34', '36', '38']}
+                cellContent={[
+                  [10, 20, 30, 40, 50, 60, 70],
+                  [15, 25, 35, 45, 55, 65, 75],
+                  [5, 10, 15, 20, 25, 30, 35],
+                  [20, 30, 40, 50, 60, 70, 80],
+                ]}
+              />
+            </CardContent>
+          </Card>
+          <Card className="production-card">
+            <CardContent>
+              <InventorySummary
+                tableName="Production - Jeans"
+                rowNames={[
+                  'Tagged',
+                  'Seam-Ripped',
+                  'Matched Panels',
+                  'Sewn/Surged',
+                  'Patch',
+                  'Finished',
+                ]}
+                columnNames={['26', '28', '30', '32', '34', '36', '38']}
+                cellContent={[
+                  [1, 4, 13, 4, 8, 3, 7],
+                  [1, 5, 3, 12, 25, 5, 7],
+                  [5, 1, 1, 1, 5, 3, 5],
+                  [1, 3, 4, 5, 6, 7, 8],
+                  [1, 3, 4, 5, 6, 7, 8],
+                  [1, 3, 4, 5, 6, 7, 8],
+                ]}
+              />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </AuthWrapper>
   );
 }

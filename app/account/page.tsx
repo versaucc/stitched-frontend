@@ -53,7 +53,7 @@ export default function AccountPage() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
-    router.push('/login')
+    router.push('/')
   }
 
   const handleSave = async () => {
