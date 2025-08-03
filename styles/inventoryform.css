@@ -1,17 +1,18 @@
 /* General form layout */
 .add-new-form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ensure consistent column width */
+  gap: 1rem; /* Increase gap for better spacing */
   padding: 1rem;
   width: 100%;
-  max-width: 50%; /* Adjust for medium and large screens */
+  max-width: 800px; /* Adjust for medium and large screens */
   margin: 0 auto;
   z-index: 10; 
 }
 
 @media (max-width: 768px) {
   .add-new-form {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust for smaller screens */
     max-width: 100%; /* Full width for small screens */
   }
 }
@@ -28,8 +29,8 @@
 /* General form layout */
 .grid-form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ensure consistent column width */
+  gap: 1rem; /* Increase gap for better spacing */
   padding: 1rem;
   width: 100%;
   max-width: 800px;

@@ -12,7 +12,7 @@ export default function ProductionEdit() {
   return (
     <div className="production-page">
       <header className="production-header">
-        <h1>Inventory Manager</h1>
+        <h2>Inventory Manager</h2>
       </header>
       <div className="toggle-switch">
         <button
