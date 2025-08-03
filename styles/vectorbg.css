@@ -16,3 +16,13 @@
   background: #000;
   z-index: 0;
 }
+
+/* Responsive styles for mobile */
+@media (max-width: 640px) {
+  .vector-bg {
+    height: 100%; /* Adjust height to fit content */
+    width: auto; /* Adjust width to fit content */
+    clip-path: none; /* Remove clip-path for better visibility */
+    background: linear-gradient(to bottom, #000, #333); /* Add gradient for better visual effect */
+  }
+}
