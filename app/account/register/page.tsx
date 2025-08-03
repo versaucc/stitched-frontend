@@ -37,8 +37,7 @@ export default function RegisterPage() {
       return;
     }
 
-    // Step 2: Send a verification link
-    const verificationLink = 'https://stitchedpdx.com/verify'; // Replace with your verification link
+
     setMessage(`Check your email to verify your account.`);
 
     // Step 3: Save user data to the 'profiles' table

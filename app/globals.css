@@ -26,8 +26,14 @@ body {
   background-color: transparent; /* Let background show through */
 }
 
+/* Hide footer-nav on small and extra-small screens */
+@media (max-width: 640px) { /* Tailwind's sm breakpoint */
+  .footer-nav {
+    display: none;
+  }
+}
+
 .footer-nav a:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(44, 0, 0);
 }
-
