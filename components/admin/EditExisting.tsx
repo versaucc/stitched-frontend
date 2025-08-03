@@ -78,20 +78,20 @@ const EditExisting: React.FC = () => {
 
       {formData && (
         <form className="add-new-form grid-form" onSubmit={handleSubmit}>
-          {Object.entries(formData).map(([key, value]) => (
-            key !== 'id' && ( // Ignore 'id' field
-              <div key={key} className="form-group">
-                <label htmlFor={key}>{key.replace(/_/g, ' ')}</label>
-                <input
-                  type="text"
-                  id={key}
-                  name={key}
-                  value={value ?? ''} // Use an empty string if value is null or undefined
-                  onChange={(e) => handleFieldChange(key, e.target.value)}
-                />
-              </div>
-            )
-          ))}
+        {Object.entries(formData).map(([key, value]) => (
+          key !== 'id' && ( // Ignore 'id' field
+            <div key={key} className="form-group">
+              <label htmlFor={key}>{key.replace(/_/g, ' ')}</label>
+              <input
+                type="text"
+                id={key}
+                name={key}
+                value={typeof value === 'string' || typeof value === 'number' ? value : ''} // Ensure value is a string or number
+                onChange={(e) => handleFieldChange(key, e.target.value)}
+              />
+            </div>
+          )
+        ))}
           <button type="submit" className="submit-button">Submit Changes</button>
           {submitResult && (
             <p
