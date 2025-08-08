@@ -21,44 +21,44 @@ export default function ProductionHome() {
   );
 
   useEffect(() => {
-    const fetchProductionData = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('production')
-          .select('waist, seam_ripped, has_panels, sewn, patch, done, embroideries');
+  const fetchProductionData = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('production')
+        .select('waist, seam_ripped, has_panels, sewn, patch, done, embroideries');
 
-        if (error) {
-          console.error('Error fetching production data:', error.message);
-          return;
-        }
+      if (error) {
+        console.error('Error fetching production data:', error.message);
+        return;
+      }
 
-        // Initialize the table structure
-        const waistSizes = ['26', '28', '30', '32', '34', '36', '38'];
-        const statusFields = ['seam_ripped', 'has_panels', 'sewn', 'patch', 'done', 'embroideries'];
-        const tableData = Array(statusFields.length).fill(null).map(() => Array(waistSizes.length).fill(0));
+      // Initialize the table structure
+      const waistSizes = ['26', '28', '30', '32', '34', '36', '38'];
+      const statusFields = ['seam_ripped', 'has_panels', 'sewn', 'patch', 'done', 'embroideries'];
+      const tableData = Array(statusFields.length).fill(null).map(() => Array(waistSizes.length).fill(0));
 
-        // Process the data
-        data?.forEach((item) => {
-          if (!item.waist) return; // Skip if waist is null or undefined
-          const waistIndex = waistSizes.indexOf(item.waist.toString());
-          if (waistIndex === -1) return; // Skip if waist size is not in the table
+      // Process the data
+      data?.forEach((item) => {
+        if (!item.waist) return; // Skip if waist is null or undefined
+        const waistIndex = waistSizes.indexOf(item.waist.toString());
+        if (waistIndex === -1) return; // Skip if waist size is not in the table
 
-          statusFields.forEach((field, fieldIndex) => {
-            if (field === 'embroideries') {
-              if (item[field] && item[field].trim() !== '') {
-                tableData[fieldIndex][waistIndex]++;
-              }
-            } else if (item[field]) {
+        statusFields.forEach((field, fieldIndex) => {
+          if (field === 'embroideries') {
+            if (item[field as keyof typeof item] && item[field as keyof typeof item].trim() !== '') {
               tableData[fieldIndex][waistIndex]++;
             }
-          });
+          } else if (item[field as keyof typeof item]) {
+            tableData[fieldIndex][waistIndex]++;
+          }
         });
+      });
 
-        setProductionData(tableData);
-      } catch (err) {
-        console.error('Unexpected error fetching production data:', err);
-      }
-    };
+      setProductionData(tableData);
+    } catch (err) {
+      console.error('Unexpected error fetching production data:', err);
+    }
+  };
 
   const fetchFinishedData = async () => {
     try {
