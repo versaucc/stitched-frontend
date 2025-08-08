@@ -9,7 +9,7 @@ const Clock: React.FC = () => {
   const [clockInTime, setClockInTime] = useState<Date | null>(null);
 
   useEffect(() => {
-    const fetchUserName = async () => {
+    const fetchUserData = async () => {
       try {
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
@@ -25,23 +25,28 @@ const Clock: React.FC = () => {
           return;
         }
 
-        const { data, error } = await supabase
+        // Fetch user name
+        const { data: profileData, error: profileError } = await supabase
           .from('profiles')
-          .select('name')
+          .select('name, clock_in')
           .eq('UID', userId)
           .single();
 
-        if (error) {
-          console.error('Error fetching user name:', error.message);
+        if (profileError) {
+          console.error('Error fetching user data:', profileError.message);
         } else {
-          setUserName(data?.name || 'User');
+          setUserName(profileData?.name || 'User');
+          if (profileData?.clock_in) {
+            setClockedIn(true);
+            setClockInTime(new Date(profileData.clock_in));
+          }
         }
       } catch (err) {
         console.error('Unexpected error:', err);
       }
     };
 
-    fetchUserName();
+    fetchUserData();
   }, []);
 
   const handleClockIn = async () => {
@@ -66,7 +71,7 @@ const Clock: React.FC = () => {
 
       const { error } = await supabase
         .from('profiles')
-        .update({ clock_in: now.toISOString() })
+        .update({clock_in: now.toISOString() })
         .eq('UID', userId);
 
       if (error) {
@@ -100,7 +105,7 @@ const Clock: React.FC = () => {
 
       const { error } = await supabase
         .from('profiles')
-        .update({ hours: hoursWorked })
+        .update({ clock_in: null, hours: hoursWorked })
         .eq('UID', userId);
 
       if (error) {

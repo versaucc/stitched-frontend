@@ -8,8 +8,105 @@ import InventorySummary from '../../components/admin/InventorySummary';
 import AuthWrapper from '../../lib/authWrapper';
 import Clock from '../../components/admin/Clock';
 import SiteViewers from '../../components/admin/SiteViewers'; // Import SiteViewers component
+import { useEffect, useState } from 'react';
+import { supabase } from '../../lib/supabase'; // Import Supabase client
 
 export default function ProductionHome() {
+  const [productionData, setProductionData] = useState<number[][]>(
+    Array(6).fill(null).map(() => Array(7).fill(0)) // Initialize with empty table structure
+  );
+
+  const [finishedData, setFinishedData] = useState<number[][]>(
+    Array(5).fill(null).map(() => Array(7).fill(0)) // Initialize with empty table structure
+  );
+
+  useEffect(() => {
+    const fetchProductionData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('production')
+          .select('waist, seam_ripped, has_panels, sewn, patch, done, embroideries');
+
+        if (error) {
+          console.error('Error fetching production data:', error.message);
+          return;
+        }
+
+        // Initialize the table structure
+        const waistSizes = ['26', '28', '30', '32', '34', '36', '38'];
+        const statusFields = ['seam_ripped', 'has_panels', 'sewn', 'patch', 'done', 'embroideries'];
+        const tableData = Array(statusFields.length).fill(null).map(() => Array(waistSizes.length).fill(0));
+
+        // Process the data
+        data?.forEach((item) => {
+          if (!item.waist) return; // Skip if waist is null or undefined
+          const waistIndex = waistSizes.indexOf(item.waist.toString());
+          if (waistIndex === -1) return; // Skip if waist size is not in the table
+
+          statusFields.forEach((field, fieldIndex) => {
+            if (field === 'embroideries') {
+              if (item[field] && item[field].trim() !== '') {
+                tableData[fieldIndex][waistIndex]++;
+              }
+            } else if (item[field]) {
+              tableData[fieldIndex][waistIndex]++;
+            }
+          });
+        });
+
+        setProductionData(tableData);
+      } catch (err) {
+        console.error('Unexpected error fetching production data:', err);
+      }
+    };
+
+  const fetchFinishedData = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('production')
+        .select('waist, wash, done');
+
+      if (error) {
+        console.error('Error fetching finished data:', error.message);
+        return;
+      }
+
+      // Initialize the table structure
+      const waistSizes = ['26', '28', '30', '32', '34', '36', '38'];
+      const washCategories = ['light', 'medium', 'dark', 'solid', 'two_tone'];
+      const tableData = Array(washCategories.length).fill(null).map(() => Array(waistSizes.length).fill(0));
+
+      // Process the data
+      data?.forEach((item) => {
+        if (!item.waist || !item.wash || !item.done) return; // Skip if waist, wash, or done is null/undefined or done is false
+        const waistIndex = waistSizes.indexOf(item.waist.toString());
+        if (waistIndex === -1) return; // Skip if waist size is not in the table
+
+        const wash = item.wash.toLowerCase();
+
+        if (wash === 'light') {
+          tableData[0][waistIndex]++;
+        } else if (wash === 'medium') {
+          tableData[1][waistIndex]++;
+        } else if (wash === 'dark') {
+          tableData[2][waistIndex]++;
+        } else if (wash.includes('/')) {
+          tableData[4][waistIndex]++; // Two-tone
+        } else {
+          tableData[3][waistIndex]++; // Solid color
+        }
+      });
+
+      setFinishedData(tableData);
+    } catch (err) {
+      console.error('Unexpected error fetching finished data:', err);
+    }
+  };
+
+    fetchProductionData();
+    fetchFinishedData();
+  }, []);
+
   return (
     <AuthWrapper>
       <div className="production-page">
@@ -18,25 +115,25 @@ export default function ProductionHome() {
           <h1>Dashboard</h1>
           <div className="header-row">
             <nav>
-              <Link href="/admin/edit">Edit</Link>
-              <Link href="/admin/view">View</Link>
+              <Link href="/admin/inventory">Inventory</Link>
               <Link href="/admin/data">Data</Link>
-              <Link href="/admin/data/sales">Sales Data</Link>
-              <Link href="/admin/data/customers">Customer Data</Link>
-              <Link href="/admin/data/website">Website Data</Link>
+              <Link href="/admin/calendar">Calendar</Link>
+              <Link href="/admin/data/finances">Finances</Link>
             </nav>
             <Clock />
           </div>
         </header>
 
         <div className="production-grid">
+
+          {/* Other cards */}
           <Card className="production-card">
             <CardContent>
               <h2 className="text-center">Recent</h2>
               <ul>
-                <li>07/18/2025 - Something something different got done</li>
-                <li>07/15/2025 - Something something else got done</li>
-                <li>07/10/2025 - Something something got done</li>
+                <li>8/7/2025 - Need to get cardstock ordered</li>
+                <li>8/7/2025 - Sam get AI files in </li>
+                <li>8/7/2025 - Get files from Garrett</li>
               </ul>
             </CardContent>
           </Card>
@@ -52,22 +149,11 @@ export default function ProductionHome() {
 
           <Card className="production-card">
             <CardContent>
-              <SiteViewers /> {/* Add SiteViewers component */}
-            </CardContent>
-          </Card>
-
-          <Card className="production-card">
-            <CardContent>
               <InventorySummary
-                tableName="Inventory - Jeans"
-                rowNames={['Light Wash', 'Medium Wash', 'Dark Wash', 'Two-Tone']}
+                tableName="Pants finished by waist and wash"
+                rowNames={['Light Wash', 'Medium Wash', 'Dark Wash', 'Solid Colors', 'Two-Tone']}
                 columnNames={['26', '28', '30', '32', '34', '36', '38']}
-                cellContent={[
-                  [10, 20, 30, 40, 50, 60, 70],
-                  [15, 25, 35, 45, 55, 65, 75],
-                  [5, 10, 15, 20, 25, 30, 35],
-                  [20, 30, 40, 50, 60, 70, 80],
-                ]}
+                cellContent={finishedData}
               />
             </CardContent>
           </Card>
@@ -75,25 +161,37 @@ export default function ProductionHome() {
           <Card className="production-card">
             <CardContent>
               <InventorySummary
-                tableName="Production - Jeans"
+                tableName="Pants in production by status and waist"
                 rowNames={[
-                  'Tagged',
                   'Seam-Ripped',
                   'Matched Panels',
                   'Sewn/Surged',
                   'Patch',
                   'Finished',
+                  'Embroidered',
                 ]}
                 columnNames={['26', '28', '30', '32', '34', '36', '38']}
-                cellContent={[
-                  [1, 4, 13, 4, 8, 3, 7],
-                  [1, 5, 3, 12, 25, 5, 7],
-                  [5, 1, 1, 1, 5, 3, 5],
-                  [1, 3, 4, 5, 6, 7, 8],
-                  [1, 3, 4, 5, 6, 7, 8],
-                  [1, 3, 4, 5, 6, 7, 8],
-                ]}
+                cellContent={productionData}
               />
+            </CardContent>
+          </Card>
+
+          {/* New Cards */}
+          <Card className="production-card">
+            <CardContent>
+              <h2 className="text-center">Costs</h2>
+            </CardContent>
+          </Card>
+
+          <Card className="production-card">
+            <CardContent>
+              <h2 className="text-center">Sales</h2>
+            </CardContent>
+          </Card>
+
+          <Card className="production-card">
+            <CardContent>
+              <h2 className="text-center">Margins</h2>
             </CardContent>
           </Card>
         </div>

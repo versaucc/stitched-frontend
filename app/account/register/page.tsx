@@ -65,7 +65,7 @@ export default function RegisterPage() {
 
   useEffect(() => {
     const param = new URLSearchParams(window.location.search).get('redirect');
-    setRedirect(param || '/home');
+    setRedirect(param || '/');
   }, []);
 
   return (
