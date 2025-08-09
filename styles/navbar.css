@@ -15,7 +15,6 @@ nav .flex {
     width: 100%; 
     top: 10px; /* Adds a margin from the top of the page */
     z-index: 50;
-    background-color: rgb(0, 0, 0); /* Optional: Add a background color for better visibility */
     padding-bottom: 20px;
     align-items: center;
   }

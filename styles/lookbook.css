@@ -101,16 +101,15 @@
 
 @media (max-width: 768px) {
   /* Root stays stacked vertically */
+  .lookbook-root {
+    margin-top: 2.5rem;
+  }
   .lookbook-content {
     flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 0rem;
     padding: 1px;
     gap: 1px;
-  }
-  .lookbook-archive-link {
-    margin-right: 5vw; /* smaller margin for mobile */
-    margin-top: 2vh; /* smaller top margin */
   }
 
   /* Hero image takes full width */
