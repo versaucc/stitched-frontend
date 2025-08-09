@@ -90,7 +90,6 @@ export default function AccountPage() {
         <div className="max-w-6xl mx-auto flex justify-start gap-6 px-6 py-4">
           <button onClick={() => router.push('/')} className="hover:text-gray-300 font-semibold">Home</button>
           <button onClick={() => router.push('/account/orders')} className="hover:text-gray-300 font-semibold">Orders</button>
-          <button onClick={() => router.push('/account/customs')} className="hover:text-gray-300 font-semibold">Customs</button>
           <button onClick={() => router.push('/account')} className="hover:text-green-400 font-semibold">Account</button>
         </div>
       </div>
@@ -123,16 +122,6 @@ export default function AccountPage() {
           <input value={contact} onChange={e => setContact(e.target.value)} className="w-full mt-1 p-2 text-black rounded" />
         </div>
 
-        <div>
-          <label>Gender:</label>
-          <select value={gender} onChange={e => setGender(e.target.value)} className="w-full mt-1 p-2 text-black rounded">
-            <option value="">—</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Nonbinary">Nonbinary</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
 
         <div>
           <label>Notes:</label>
@@ -156,5 +145,4 @@ export default function AccountPage() {
         Log Out
       </button>
     </div>
-  )
-}
+  )}

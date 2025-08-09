@@ -105,34 +105,9 @@ const AddNew: React.FC = () => {
         <label htmlFor="brand">Brand</label>
         <input type="text" id="brand" name="brand" value={formData.brand} onChange={handleChange} />
       </div>
-      <div className="form-group small">
-        <label htmlFor="using">Using</label>
-        <select id="using" name="using" value={formData.using.toString()} onChange={handleChange}>
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
-      </div>
-      <div className="form-group small">
-        <label htmlFor="donor">Donor</label>
-        <select id="donor" name="donor" value={formData.donor.toString()} onChange={handleChange}>
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
-      </div>
-      <div className="form-group small">
-        <label htmlFor="scrap">Scrap</label>
-        <select id="scrap" name="scrap" value={formData.scrap.toString()} onChange={handleChange}>
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
-      </div>
         <div className="form-group medium">
         <label htmlFor="embroideries">Embroideries</label>
         <textarea id="embroideries" name="embroideries" value={formData.embroideries} onChange={handleChange} />
-      </div>
-      <div className="form-group small">
-        <label htmlFor="collection">Collection</label>
-        <input type="text" id="collection" name="collection" value={formData.collection} onChange={handleChange} />
       </div>
       <div className="form-group small">
         <label htmlFor="category">Category</label>
@@ -143,11 +118,14 @@ const AddNew: React.FC = () => {
         <input type="number" id="price" name="price" value={formData.price} onChange={handleChange} />
       </div>
       <div className="form-group small">
-        <label htmlFor="finished">Finished</label>
-        <select id="finished" name="finished" value={formData.finished.toString()} onChange={handleChange}>
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
+        <label htmlFor="done">Done</label>
+        <input
+          type="checkbox"
+          id="done"
+          name="finished"
+          checked={formData.finished}
+          onChange={handleChange}
+        />
       </div>
       <div className="form-group medium">
         <label htmlFor="notes">Notes</label>
