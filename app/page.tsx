@@ -48,16 +48,21 @@ export default function HomePage() {
         {/* email box */}
         <form onSubmit={handleSubmit} className="homepage-form">
           <div className="homepage-input-wrapper">
-            <input
-              className="homepage-input"
-              type="email"
-              placeholder="Enter your email…"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)} // Update state on input change
-              required // Ensure email is required
-            />
+        <input
+          className="homepage-input"
+          type="email"
+          placeholder={window.innerWidth <= 768 ? "Email" : "Enter your email…"}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)} // Update state on input change
+          required // Ensure email is required
+          onFocus={() => {
+            if (window.innerWidth <= 768) {
+              e.target.placeholder = "Email";
+            }
+          }}
+        />
             <button type="submit" className="homepage-input-arrow">
-              ➡
+              ◉
             </button>
           </div>
         </form>
