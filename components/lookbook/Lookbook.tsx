@@ -6,6 +6,8 @@ import Link from 'next/link'
 import FooterNav from '../shop/FooterNav'
 import TransparentTextBox from '../tools/TransparentTextBox'
 
+// WHEN CAN : restore archive link and model desc box
+
 import 'styles/lookbook.css'
 
 interface Collection {
@@ -30,9 +32,10 @@ export default function Lookbook({ collections }: LookbookProps) {
 
   return (
     <div className="lookbook-root">
-      <div className="lookbook-archive-link">
+      <div className="lookbook-header">
+        <span className="lookbook-title">summer 25</span>
         <Link href="/lookbook/archive" className="lookbook-archive-link">
-          lookbook archive
+          archive
         </Link>
       </div>
 
@@ -45,9 +48,6 @@ export default function Lookbook({ collections }: LookbookProps) {
             fill
             className="object-cover"
           />
-          <TransparentTextBox>
-            5"10, 32" waist, 32" inseam, wearing size M top
-          </TransparentTextBox>
         </section>
 
         {/* Thumbnails */}
@@ -70,6 +70,14 @@ export default function Lookbook({ collections }: LookbookProps) {
           ))}
         </nav>
       </div>
+        <div className="mx-auto text-sm">
+        <FooterNav 
+            links={[
+            { label: 'shop',         href:'/shop' },
+            { label: 'account',     href:'/account' },
+            { label: 'contact',      href:'/contact' },
+          ]}/>
+        </div>
     </div>
   )
 }

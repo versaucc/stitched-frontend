@@ -7,6 +7,15 @@ nav .flex {
   align-items: center;
 }
 
+/* Logo image hover effect */
+nav img {
+  transition: transform 0.3s ease; /* Smooth scaling effect */
+}
+
+nav img:hover {
+  transform: scale(1.1); /* Slightly grow the image on hover */
+}
+
 /* Mobile-specific styles */
 @media (max-width: 768px) {
   nav {
@@ -18,7 +27,6 @@ nav .flex {
     padding-bottom: 20px;
     align-items: center;
   }
-
 
   nav img {
     margin-top: 5px; /* Adds a little margin for the logo */

@@ -16,14 +16,14 @@ body {
 
 .footer-nav {
   position: fixed;          /* Anchor to viewport */
-  bottom: 8px;             /* Distance from bottom of screen */
-  left: 50%;                /* Start at middle horizontally */
-  transform: translateX(-50%); /* Center it */
+  bottom: 0px;             /* Distance from bottom of screen */
+  right: 2%;                
   display: flex;            /* Inline links */
-  gap: 1.5rem;              /* Spacing between links */
+  gap: 1px;              /* Spacing between links */
   z-index: 50;              /* Keep it above background layers */
   pointer-events: auto;     /* Ensure it's clickable */
   background-color: transparent; /* Let background show through */
+  font-size: 0.625rem;  
 }
 
 /* Hide footer-nav on small and extra-small screens */
@@ -35,5 +35,5 @@ body {
 
 .footer-nav a:hover {
   background-color: rgb(255, 255, 255);
-  color: rgb(44, 0, 0);
+  color: rgb(0, 0, 0);
 }

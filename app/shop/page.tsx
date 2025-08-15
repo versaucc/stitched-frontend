@@ -17,10 +17,7 @@ export default function ShopPage() {
 
   return (
     <div className="shop-container">
-      {/* ─── LEFT SIDEBAR ───────────────────────────── */}
-      <aside className="sidebar">
-        <Sidebar itemCount={0} currency="USD" />
-      </aside>
+      <MinimalNavbar />
 
       {/* ─── MAIN CONTENT ───────────────────────────── */}
       <main className="main-content">
@@ -28,7 +25,7 @@ export default function ShopPage() {
         <div className="header">
           <CategoryNav
             categories={[
-              'All','Jorts','Pants','Accessories', 'Custom'
+              'Featured','Pants','Jorts', 'Custom'
             ]}
             active={category}
             onSelect={setCategory}
@@ -41,16 +38,13 @@ export default function ShopPage() {
         </div>
 
         {/* Footer nav links */}
-        <div className="footer">
+        <div className="footer text-sm">
           <FooterNav
             links={[
-              { label: 'shop',         href:'/shop' },
-              { label: 'custom',       href:'/shop/custom' },
+              { label: 'custom',       href:'/shop/custom' }, // Make stay tuned page/component
               { label: 'lookbook',     href:'/lookbook' },
-              { label: 'archive',      href:'/archive' },
               { label: 'contact',      href:'/contact' },
-              { label: 'stores',       href:'/stores' },
-              { label: 'jobs',         href:'/jobs' },
+              { label: 'account',       href:'/account' },
             ]}
           />
         </div>

@@ -4,8 +4,8 @@
 .shop-container {
   display: flex;
   height: 90vh;                /* fill the viewport */
-  margin-left: 17vw;               /* mx-4 */
-  margin-top: 5vh; 
+  margin-left: 33vw;               /* mx-4 */
+  margin-top: 10vh; 
   padding: 2.5rem 0;            /* py-10 */
   background: #000;
   color: #fff;

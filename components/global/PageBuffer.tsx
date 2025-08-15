@@ -3,7 +3,7 @@ import { useEffect, useState, forwardRef, useImperativeHandle, useRef } from 're
 import { useRouter } from 'next/navigation'
 import VectorAnimation from '../backgrounds/VectorAnimation'
 
-const MIN_BUFFER_TIME = 1000 // ms
+const MIN_BUFFER_TIME = 500 // ms
 
 export type PageBufferHandle = {
   showAndRedirect: (href: string) => void

@@ -72,6 +72,7 @@ export default function HomePage() {
         <nav className="homepage-menu">
           <a href="./lookbook">Lookbook</a>
           <a href="./account">Account</a>
+          <a href="./contact">Contact</a>
         </nav>
       </main>
     </div>
