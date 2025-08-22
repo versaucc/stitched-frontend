@@ -12,7 +12,7 @@ const QuickEdit: React.FC = () => {
   const handleSearch = async () => {
     const { data, error } = await supabase
       .from('production')
-      .select('has_panels, seam_ripped, embroidered, sewn, patch, done')
+      .select('has_panels, seam_ripped, embroidered, sewn, patch, surged, hemmed, done, sold')
       .eq('tagId', searchTag)
       .single();
 
