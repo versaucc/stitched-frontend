@@ -15,9 +15,7 @@ export default function ContactPage() {
   useEffect(() => {
     const fetchUserEmail = async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setEmail(user.email); // Pre-fill email if logged in
-      }
+      setEmail(user?.email ?? ''); // Use an empty string if user.email is undefined
     };
 
     fetchUserEmail();
