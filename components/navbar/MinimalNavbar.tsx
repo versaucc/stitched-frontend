@@ -92,7 +92,7 @@ export default function MinimalNavbar() {
   const subtotal = Object.values(cart).reduce((acc, item) => {
     const product = products.find((p) => p.id === item.product_id);
     if (!product) return acc;
-    return acc + product.price * item.quantity;
+    return acc + Number(product.price) * Number(item.quantity);
   }, 0);
 
   return (
