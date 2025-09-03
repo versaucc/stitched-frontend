@@ -25,7 +25,7 @@ export default function ShopPage() {
         <div className="header">
           <CategoryNav
             categories={[
-              'Featured','Pants','Jorts', 'Custom'
+              'New','Pants','Jorts'
             ]}
             active={category}
             onSelect={setCategory}
@@ -41,10 +41,11 @@ export default function ShopPage() {
         <div className="footer text-sm">
           <FooterNav
             links={[
-              { label: 'custom',       href:'/shop/custom' }, // Make stay tuned page/component
               { label: 'lookbook',     href:'/lookbook' },
-              { label: 'contact',      href:'/contact' },
               { label: 'account',       href:'/account' },
+              { label: 'local',      href:'/local' },
+              { label: 'about',      href:'/about' },
+              { label: 'contact',      href:'/contact' },
             ]}
           />
         </div>

@@ -18,16 +18,16 @@ export interface Product {
 export const products: Product[] = [
   {
     id: '1',
-    slug: 'pants-casual',
-    title: 'Casual',
+    slug: 'lw-s',
+    title: 'Light Wash "S"',
     price: '$110',
-    imageUrl: '/products/jeans/noah-cargo-pants-1.jpg',
-    hoverImageUrl: '/products/jeans/noah-cargo-pants-2.jpg',
+    imageUrl: '/products/jeans/lw-s/sam-lw-s.jpg',
+    hoverImageUrl: '/products/jeans/lw-s/sam-lw-s.jpg',
     sizes: ['28', '30', '32', '34'],
-    modelInfo: 'Model (height 186) wears size 32',
-    modelHeight: '186cm',
+    modelInfo: 'Model (height 4"10) wears size 32',
+    modelHeight: '4"10',
     modelSize: '32',
-    description: '14.5oz raw denim / 100% cotton / fits true to size',
+    description: 'Hand-sewn / 100% cotton / baggy fit',
     images: [
       '/lookbook/collection-1/00.JPG',
       '/lookbook/collection-1/01.JPG',

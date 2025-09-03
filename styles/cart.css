@@ -1,0 +1,52 @@
+/* Base cart drawer */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: #525252;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  width: 100%; /* default for mobile */
+}
+
+/* Large screens: cart takes up half the viewport */
+@media (min-width: 1024px) {
+  .cart-drawer {
+    width: 30%;
+  }
+}
+
+.cart-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}
+
+.cart-close {
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  background: none;
+  border: none;
+}
+
+.cart-contents {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.cart-contents h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.cart-contents p {
+  color: #cfcfcf; /* Tailwind gray-600 */
+}

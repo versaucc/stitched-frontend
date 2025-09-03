@@ -73,9 +73,11 @@ export default function Lookbook({ collections }: LookbookProps) {
         <div className="mx-auto text-sm">
         <FooterNav 
             links={[
-            { label: 'shop',         href:'/shop' },
-            { label: 'account',     href:'/account' },
-            { label: 'contact',      href:'/contact' },
+              { label: 'shop',     href:'/shop' },
+              { label: 'account',       href:'/account' },
+              { label: 'local',      href:'/local' },
+              { label: 'about',      href:'/about' },
+              { label: 'contact',      href:'/contact' },
           ]}/>
         </div>
     </div>
