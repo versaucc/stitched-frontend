@@ -1,0 +1,62 @@
+Major revisions as of 8/2/2025
+
+On your own: 
+    Link supa to inventory dashboard
+        -Add and refine how and what card content is displayed 
+        -Create product (add product) page for images and whatnot. Supa table too.
+        -Link inventory to card content
+        -Add calendar page (and planning page)
+        -Wire up email system
+        -Create a cart icon global for shop and lookbook
+        -Add a "costs" card to admin dash 
+        -Add a "sales" card to admin dash
+        -Add a "margins" card to admin dash
+        -Model sizing. 
+        - Row level security (MUST)
+        -Make fred "coming soon" 
+        -Domains domains domains 
+        -More user tracking 
+        -Stripe 
+    
+    llms.text
+    robots.text
+    
+
+    Need to go deep in shop: 
+        -Categories 
+        -Filtering 
+        -Search
+        -Sold out! 
+        -mobile styling 
+
+    About: 
+        -Have some type of discography 
+        -Cool sheit
+
+    Locations: 
+        PICS OF SALEM STORE!
+
+Together: 
+    Pictures: 
+        -lookbook
+        -shop
+        -other media that wouldbe nice 
+    
+    Priorities:
+        -Admin dashboard 
+        -Shop
+        
+    Styling: 
+        -Fonts
+        -Other misc 
+    
+    -Set up emails 
+    -Set up notis 
+    -Link bank? 
+    -Go over pricing (short and long term)
+
+Talking points for licensing IP 
+Contract 
+
+Eventually square sync 
+        

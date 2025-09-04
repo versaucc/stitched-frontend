@@ -1,0 +1,8 @@
+
+More detailed admin dashboard list of current unfinished, finished, and styling 
+
+Vector based css profiles with CI CD and reinforcement learning???
+
+Add totals sections to dashboard table
+
+Sales, 

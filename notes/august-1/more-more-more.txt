@@ -1,0 +1,91 @@
+fix table for done pairs - sizing 
+add surged, hemmed, leather patch
+done should show up
+
+
+
+
+
+
+TODO 08/09/2025:
+    make sure admin edit uses supa correctly 
+    fix ordering of tables 
+
+    account logic 
+        verification page /
+        when sign out, sign in or home? 
+        orders page? 
+
+    row level security 
+RFID??
+
+Google workspace emails 
+Admin page -> more fine tuning (branch??)
+Row level security 
+
+
+domain transfer: 
+
+    add DNS records to cloudfare 
+    DNA settings to zoho 
+        transfer vercel domain to cloudfare - still host on vercel 
+
+
+advanced tracking
+
+what do we want 
+    money 
+    events? retail store - other avenues? 
+    production 
+
+
+renegotiation 
+
+other options: 
+    storage unit -
+
+    platforms online for pop ups 
+
+    parties - music - sell - cars - craftsmanship - mobile - nimble 
+
+    interview the crap out of that guy 
+
+    
+
+your TODO
+spreadsheet for rent ***
+spreadsheet for you  *
+e36 fog light duct ebay **
+website tidy?? ****
+plan for tm 
+
+
+stitched for 08/15 -> 
+    DNS stuff (in prog)
+    Supabase security (after spreadsheet)
+    robots/llms 
+    basic SEO... 
+    dial mobile for admin 
+    dial mobile for customers. 
+    prep R2 bucket for photos.
+    box drive? 
+
+spreadsheet plan 
+    prompt/look for good format. 
+    start on google. 
+
+e36 fog duct.
+    slow is smooth, smooth is fast
+    start on thingiverse
+    picture plan
+    start listing 
+    good desc. 
+
+
+
+mobile styling: 
+    center lookbook content
+    cheeky nav for links 
+    make the side scroll a dial 
+    similar concepts for shop 
+    global menu for account/cart for certain pages 

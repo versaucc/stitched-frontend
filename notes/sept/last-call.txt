@@ -1,0 +1,33 @@
+
+
+TODO: 
+
+    Cart drawer
+        - Link to "add to cart" 
+            - Link to profile OR 
+            - A session created at runtime 
+        - Checkout button 
+        - More cart specs 
+            - Delete button 
+            - Favicon for product
+            - Quantity button
+            - Subtotal at the bottom
+        - Pass a subtotal and order description to Stripe. 
+        On checkout, check the logged in status. If none prompt to sign in or continue as a guest
+
+    Local page 
+        Pics of Salem store, address, phone number
+
+    About page
+        Ask Sam and Noah for a short message and maybe some pics
+
+    TOS 
+    Privacy Policy 
+    Refund
+
+Finished but needs attention: 
+    About page: needs photos and a statement from Sam and Noah 
+    Local page: Needs photos, store address, store hours, phone number
+
+    Cart drawer: Formatted well, but needs attention on slow update, pricing/addition errors, checkout needs redirect. 
+    
