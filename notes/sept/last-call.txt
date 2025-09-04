@@ -30,4 +30,25 @@ Finished but needs attention:
     Local page: Needs photos, store address, store hours, phone number
 
     Cart drawer: Formatted well, but needs attention on slow update, pricing/addition errors, checkout needs redirect. 
+
+
+09/03/2025 TODO 
+    - /shop :
+        - Make fullscreen
+        - Tab filter - make it like news subline
+        - Center 
+        - 
+    /items/[slug] : 
+        - Move title to top 
+        - Move price to top 
+        - 
+    /lookbook : 
+        - Make bigger 
+        - No x Scrolling 
+        - Archive tab lower
+
+    Stripe... 
+    Checkout logic 
+    Cart drawer 
+    About page. 
     

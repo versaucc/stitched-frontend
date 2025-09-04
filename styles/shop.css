@@ -54,3 +54,45 @@
   padding: 0 0.5rem;
   margin-top: 2px;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .shop-container {
+    flex-direction: column;       /* stack sidebar and main content */
+    margin-left: 0;
+    margin-top: 0;
+    padding: 1rem;                /* smaller padding for mobile */
+    height: auto;                 /* let it grow naturally */
+  }
+
+  .sidebar {
+    width: 100%;                  /* full width above grid */
+    min-width: unset;
+    margin: 0 0 1rem 0;           /* spacing below sidebar */
+    flex-direction: row;           /* optional: horizontal buttons/filters */
+    flex-wrap: wrap;               /* wrap items if needed */
+    justify-content: flex-start;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .header {
+    margin-left: 0;
+    padding: 0.5rem 0;
+  }
+
+  .product-grid {
+    width: 100%;                  /* fill available width */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns on mobile */
+    gap: 0.5rem;                  /* small gaps between items */
+    overflow-y: visible;          /* let page scroll naturally */
+  }
+
+  .footer {
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+  }
+}
