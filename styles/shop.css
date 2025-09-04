@@ -55,22 +55,21 @@
   margin-top: 2px;
 }
 
-/* Mobile styles */
 @media (max-width: 768px) {
   .shop-container {
-    flex-direction: column;       /* stack sidebar and main content */
-    margin-left: 0;
-    margin-top: 0;
-    padding: 1rem;                /* smaller padding for mobile */
-    height: auto;                 /* let it grow naturally */
+    flex-direction: column;
+    margin: 0;
+    padding: 0.5rem;   /* smaller padding for mobile */
+    height: auto;
+    width: 100vw;       /* fill the viewport */
+    box-sizing: border-box;
   }
 
   .sidebar {
-    width: 100%;                  /* full width above grid */
-    min-width: unset;
-    margin: 0 0 1rem 0;           /* spacing below sidebar */
-    flex-direction: row;           /* optional: horizontal buttons/filters */
-    flex-wrap: wrap;               /* wrap items if needed */
+    width: 100%;
+    margin: 0 0 1rem 0;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: flex-start;
   }
 
@@ -84,11 +83,17 @@
   }
 
   .product-grid {
-    width: 100%;                  /* fill available width */
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);  /* 2 columns on mobile */
-    gap: 0.5rem;                  /* small gaps between items */
-    overflow-y: visible;          /* let page scroll naturally */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    overflow-y: visible;  /* let page scroll naturally */
+    box-sizing: border-box; /* ensure grid respects padding */
+  }
+
+  /* Optional: make each product card fully fit its grid cell */
+  .product-grid > * {
+    width: 100%;
   }
 
   .footer {
