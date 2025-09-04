@@ -144,7 +144,7 @@
 /* Small screens (mobile, up to 640px) */
 @media (max-width: 640px) {
   .homepage-menu {
-    width: 30vw;
+    width: 60vw;
     max-width: 100%;
     min-width: 8rem; 
     min-height: 12rem;

@@ -11,12 +11,10 @@ export default function LocalPage() {
     // In practice, Next.js cannot read file system on the client.
     // If you have a fixed list of images, hardcode them here.
     const imgArray = [
-      '/local/img1.jpg',
-      '/local/img2.jpg',
-      '/local/img3.jpg',
-      '/local/img4.jpg',
-      '/local/img5.jpg',
-      '/local/img6.jpg',
+      'local/img1.jpeg',
+      'local/img2.jpeg',
+      '/local/img3.jpeg',
+      'local/img4.jpeg',
     ];
     setImages(imgArray);
   }, []);
@@ -35,8 +33,8 @@ export default function LocalPage() {
         {/* Left Column */}
         <div className="flex-1 flex flex-col gap-4">
           <h1 className="text-3xl font-bold mb-4">Stitched x Wonderful World Salem</h1>
-          <p className="text-lg">1234 Fashion Ave, Salem, OR 97301</p>
-          <p className="text-lg">Phone: (555) 123-4567</p>
+          <p className="text-lg">285 Liberty St. Suite 145, Salem, OR 97301</p>
+          <p className="text-lg">Phone: (503) 302-7777</p>
 
         {/* Store Hours */}
         <div className="mt-4">
@@ -53,8 +51,7 @@ export default function LocalPage() {
 
 
           <p className="mt-6">
-            Come visit us in store and check out our latest collections. Our team is
-            ready to help you find the perfect pieces!
+            Grand opening September 6. Fashion for everyone. Bring the whole family! 
           </p>
         </div>
 
