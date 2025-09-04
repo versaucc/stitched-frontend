@@ -160,7 +160,9 @@ export default function MinimalNavbar() {
                         <p className="font-semibold">{product.title}</p>
                         <p className="text-sm">Size: {item.size}</p>
                       </div>
-                      <p className="font-semibold">${product.price * item.quantity}</p>
+                      <p className="font-semibold">
+                        ${Number(product.price ?? 0) * (item.quantity ?? 0)}
+                      </p>
                       <p className="ml-4 text-sm">Qty: {item.quantity}</p>
 
                       {/* Remove button */}
