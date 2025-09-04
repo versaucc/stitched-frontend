@@ -20,7 +20,7 @@ body {
   right: 2%;                
   display: flex;            /* Inline links */
   gap: 1px;              /* Spacing between links */
-  z-index: 50;              /* Keep it above background layers */
+  z-index: 1;              /* Keep it above background layers */
   pointer-events: auto;     /* Ensure it's clickable */
   background-color: transparent; /* Let background show through */
   font-size: 0.625rem;  

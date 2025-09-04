@@ -1,12 +1,14 @@
-/* styles/shop.css */
+/* ==========================
+   SHOP STYLESHEET
+   ========================== */
 
 /* overall layout */
 .shop-container {
   display: flex;
-  height: 90vh;                /* fill the viewport */
-  margin-left: 33vw;               /* mx-4 */
-  margin-top: 10vh; 
-  padding: 2.5rem 0;            /* py-10 */
+  height: 90vh;                 
+  margin-left: 33vw;            
+  margin-top: 4rem; 
+  padding: 2.5rem 0;           
   background: #000;
   color: #fff;
   box-sizing: border-box;
@@ -15,26 +17,27 @@
 /* left sidebar */
 .sidebar {
   flex-shrink: 0;
-  width: 15vw;                   /* adjust as needed */
+  width: 15vw;                  
   min-width: 120px;
   margin-top: 1.5rem; 
-  margin-right: 0.5rem;           /* spacing before main content */
+  margin-right: 0.5rem;          
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
-/* main column */
+/* main content column */
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  width: auto;
 }
 
 /* header above grid */
 .header {
   padding: 0 0.5rem;
-  margin-bottom: 1px;           /* gap to grid */
+  margin-bottom: 1px;          
   margin-left: 6px;
   display: flex;
   justify-content: space-between;
@@ -43,61 +46,133 @@
 
 /* the scrollable grid */
 .product-grid {
-  flex: 1;                      /* fill remaining vertical space */
-  width: 40vw;
+  flex: 1;                      
+  width: 40vw;                  /* desktop width */
   overflow-y: auto;
-  margin-bottom: 1px;           /* gap to footer */
+  margin-bottom: 1px;          
+  display: grid;
+  grid-template-columns: 1fr;   /* desktop default */
+  gap: 0.5rem;
+  box-sizing: border-box;
 }
 
-/* footer below grid */
+/* product items */
+.product-grid > * {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* footer */
 .footer {
   padding: 0 0.5rem;
   margin-top: 2px;
 }
 
+/* ==========================
+   MOBILE STYLES
+   ========================== */
 @media (max-width: 768px) {
+  .shop-container {
+    flex-direction: column;      
+    margin: 0;
+    margin-top: 6rem; 
+    padding: 0;
+    width: 100vw;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+    margin: 0 0 1rem 0;
+    flex-direction: row;         
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .main-content {
+    width: 100% !important;       /* force full width */
+    flex: none;                   /* remove flex constraints */
+  }
+
+  .header {
+    margin-right: 6px;
+    padding: 0.5rem;
+  }
+
+  .product-grid {
+    width: 195% !important;       /* take full width */
+    max-width: 200%;
+    grid-template-columns: repeat(2, 1fr);  
+    gap: 0.5rem;
+    overflow-y: visible;
+    padding-right: 2px; 
+  }
+
+  .product-grid > * {
+    width: 100%;
+  }
+
+  .product-grid > * img {
+  width: 100%;         /* fill the width of the grid cell */
+  height: auto;        /* maintain original aspect ratio */
+  display: block;      /* remove inline spacing */
+  object-fit: cover;   /* optional: crop to fill the cell without distortion */
+}
+
+
+  .footer {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* ==========================
+   EXTRA SMALL SCREENS (<480px)
+   ========================== */
+@media (max-width: 660px) {
   .shop-container {
     flex-direction: column;
     margin: 0;
-    padding: 0.5rem;   /* smaller padding for mobile */
-    height: auto;
-    width: 100vw;       /* fill the viewport */
+    margin-top: 6rem; 
+    padding: 0.25rem;       /* small padding for tiny screens */
+    width: 100vw;
     box-sizing: border-box;
   }
 
   .sidebar {
     width: 100%;
-    margin: 0 0 1rem 0;
+    min-width: unset;
+    margin: 0 0 0.5rem 0;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
   }
 
   .main-content {
-    width: 100%;
+    width: 200% !important;
   }
 
   .header {
-    margin-left: 0;
-    padding: 0.5rem 0;
+    margin-right: 2px;
+    padding: 0.25rem 0;
   }
 
   .product-grid {
-    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    overflow-y: visible;  /* let page scroll naturally */
-    box-sizing: border-box; /* ensure grid respects padding */
+    grid-template-columns: repeat(2, 1fr); /* force 2 columns */
+    gap: 0.25rem;                          /* tiny gap for small screens */
+    width: 100%;
+    max-width: 100%;                   /* page scrolls naturally */
+    box-sizing: border-box;
   }
 
-  /* Optional: make each product card fully fit its grid cell */
   .product-grid > * {
-    width: 100%;
+    width: 100%;                            /* each product fills its column */
   }
 
   .footer {
-    padding: 0.5rem 0;
-    margin-top: 0.5rem;
+    padding: 0.25rem 0;
+    margin-top: 0.25rem;
   }
 }
+
