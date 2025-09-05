@@ -189,7 +189,9 @@ export default function MinimalNavbar() {
               {Object.keys(cart).length > 0 && (
                 <div className="cart-footer mt-6 flex flex-col items-center">
                   <p className="font-bold text-lg mb-4">Subtotal: ${subtotal}</p>
-                  <button className="bg-white text-black px-6 py-2 rounded hover:bg-gray-200">
+                  <button 
+                  onClick={() => router.push("https://buy.stripe.com/3cIdR90l876cez86xYfrW00")}
+                  className="bg-white text-black px-6 py-2 rounded hover:bg-gray-200">
                     Checkout
                   </button>
                 </div>
