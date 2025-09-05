@@ -24,7 +24,7 @@ const FooterNav: FC<FooterNavProps> = ({ links }) => {
   }
 
   return (
-    <nav className="flex justify-left space-x-8 uppercase py-1">
+    <nav className="flex justify-left space-x-2 uppercase py-1">
       <PageBuffer ref={bufferRef} />
       {links.map(({ label, href }) => (
         <Link

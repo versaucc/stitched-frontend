@@ -9,6 +9,8 @@ import '../../styles/navbar.css';
 import '../../styles/cart.css'; // new stylesheet
 import { supabase } from '../../lib/supabase';
 import { products } from '../../data/product';
+import { useRouter } from "next/navigation"
+
 import toast from 'react-hot-toast';
 
 type CartItem = {
@@ -23,6 +25,7 @@ export default function MinimalNavbar() {
   const [cart, setCart] = useState<{ [key: string]: CartItem }>({});
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
+  const router = useRouter()
 
   const pathname = usePathname();
 
@@ -100,6 +103,13 @@ export default function MinimalNavbar() {
       <nav className="fixed top-4 left-0 w-full z-50">
         <PageBuffer ref={bufferRef} />
         <div className="flex items-center justify-between px-6">
+        {showCart && (
+          <button
+              onClick={() => router.push("/")}
+              className="fixed left-16 flex flex-col justify-between h-50 cursor-pointer"
+            >
+              <span className="home-btn">&#8962;</span>
+          </button>)}
           <Link href="/" className="pointer-events-auto justify-center" onClick={handleHomeClick}>
             <img
               src="/logos/red-s-logo.png"

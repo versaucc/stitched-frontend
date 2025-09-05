@@ -75,12 +75,16 @@
    ========================== */
 @media (max-width: 768px) {
   .shop-container {
-    flex-direction: column;      
-    margin: 0;
-    margin-top: 6rem; 
-    padding: 0;
-    width: 100vw;
-  }
+  display: flex;          /* ensure flex layout */
+  flex-direction: column; /* stack children vertically */
+  margin: 0;              /* remove default margin */
+  margin-top: 6rem;       /* 6rem top spacing */
+  padding: 0;             /* remove padding */
+  width: 100vw;           /* full viewport width */
+  height: calc(100vh - 6rem); /* fill remaining viewport height */
+  overflow-y: auto;       /* enable smooth vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+}
 
   .sidebar {
     width: 100%;
@@ -97,7 +101,7 @@
   }
 
   .header {
-    margin-left: auto;
+    margin-left: 4rem;
     padding: 0.5rem;
   }
 
@@ -124,8 +128,7 @@
 
   .footer {
     padding: 0.5rem;
-    margin-top: 0.5rem;
-    margin-left: 6rem;
+    margin-top: 0.5rem; 
   }
 }
 
@@ -134,13 +137,16 @@
    ========================== */
 @media (max-width: 660px) {
   .shop-container {
-    flex-direction: column;
-    margin: 0;
-    margin-top: 6rem; 
-    padding: 0.25rem;       /* small padding for tiny screens */
-    width: 100vw;
-    box-sizing: border-box;
-  }
+  display: flex;          /* ensure flex layout */
+  flex-direction: column; /* stack children vertically */
+  margin: 0;              /* remove default margin */
+  margin-top: 6rem;       /* 6rem top spacing */
+  padding: 0;             /* remove padding */
+  width: 100vw;           /* full viewport width */
+  height: calc(100vh - 6rem); /* fill remaining viewport height */
+  overflow-y: auto;       /* enable smooth vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+}
 
   .sidebar {
     width: 100%;
@@ -152,11 +158,11 @@
   }
 
   .main-content {
-    width: 200% !important;
+    width: 100% !important;
   }
 
   .header {
-    margin-left: auto;
+    margin-left: 4rem;
     padding: 0.25rem 0;
   }
 
@@ -164,9 +170,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* force 2 columns */
     gap: 0.25rem;                          /* tiny gap for small screens */
-    width: 100%;
-    max-width: 100%;                   /* page scrolls naturally */
+    width: 200%;
+    max-width: 200%;                   /* page scrolls naturally */
     box-sizing: border-box;
+    padding-right: 2px; 
   }
 
   .product-grid > * {
@@ -176,7 +183,6 @@
   .footer {
     padding: 0.25rem 0;
     margin-top: 0.25rem;
-    margin-left: 0.25rem; 
   }
 }
 

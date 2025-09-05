@@ -36,8 +36,7 @@ export default function ShopPage() {
         <div className="product-grid">
           <ShopGrid products={products} />
         </div>
-
-        {/* Footer nav links */}
+                      {/* Footer nav links */}
         <div className="footer text-sm">
           <FooterNav
             links={[
@@ -49,7 +48,10 @@ export default function ShopPage() {
             ]}
           />
         </div>
+
       </main>
+
+
     </div>
   )
 }
